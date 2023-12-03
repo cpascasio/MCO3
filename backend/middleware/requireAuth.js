@@ -6,6 +6,7 @@ const requireAuth = async (req, res, next) => {
     const { authorization } = req.headers;
 
     if (!authorization) {
+        console.log("AUTHORIZERATION: ", authorization);
         return res.status(401).json({ error: "You must be logged in." });
     }
 
@@ -15,7 +16,11 @@ const requireAuth = async (req, res, next) => {
     try{
         const {_id} = jwt.verify(token, process.env.JWT_SECRET);
 
+        console.log("ID: ", _id);
+
+
         req.user = await User.findOne({_id}).select("_id");
+        next();
 
 
 

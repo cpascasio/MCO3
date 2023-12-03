@@ -69,7 +69,7 @@ export default function ReviewModalV2({ setStoreReviews, storeID }) {
     
     const config = {
       headers: {
-        Authorization: `Bearer ${user.token}`, // Replace with your actual access token
+        "Authorization": `Bearer ${user.token}`, // Replace with your actual access token
         "Content-Type": "multipart/form-data",
       },
     };

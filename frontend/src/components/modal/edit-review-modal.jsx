@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { useEffect } from "react";
 import { useRef } from "react";
+import { useUserContext } from "../../../hooks/useUserContext";
 
 
 const EditReviewModal = ({ setStoreReviews, review }) => {
@@ -14,6 +15,8 @@ const EditReviewModal = ({ setStoreReviews, review }) => {
     const [error, setError] = useState("");
     const [file, setFile] = useState(null);
     const [modified, setModified] = useState(false);
+    const { user } = useUserContext();
+
 
     const toastID = useRef(null);
 
@@ -26,6 +29,7 @@ const EditReviewModal = ({ setStoreReviews, review }) => {
     };
 
 
+    
 
     
 
@@ -34,6 +38,12 @@ const EditReviewModal = ({ setStoreReviews, review }) => {
         // Check if both title and review are provided
         event.preventDefault();
 
+        const config = {
+            headers: {
+              "Authorization": `Bearer ${user.token}`, // Replace with your actual access token
+              "Content-Type": "multipart/form-data",
+            },
+          };
 
         if(modified){
             console.log("MODIFIED")
@@ -62,7 +72,7 @@ const EditReviewModal = ({ setStoreReviews, review }) => {
     
     
     await axios
-      .patch(import.meta.env.VITE_BASE_URL + `/api/posts/update_post/${review._id}`, form)
+      .patch(import.meta.env.VITE_BASE_URL + `/api/posts/update_post/${review._id}`, form, config)
       .then(() => {
         toast.update(toastID.current, {
           render: "Review successfully updated!!",

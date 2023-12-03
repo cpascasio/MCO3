@@ -32,6 +32,8 @@ const CommentCard = ({ setStoreReviews, review, ownerID, userLoggedIn }) => {
 
     const toastID = useRef(null);
 
+
+    
     useEffect(() => {
         setComments(fetchComments);
     }, [fetchComments]);
@@ -51,9 +53,18 @@ const CommentCard = ({ setStoreReviews, review, ownerID, userLoggedIn }) => {
     const handleUpvote = async (event) => {
         event.preventDefault();
 
+        const config = {
+            headers: {
+              "Authorization": `Bearer ${user.token}`, // Replace with your actual access token
+              "Content-Type": "multipart/form-data",
+            },
+          };
+
+        
+
         if(!helpfulClicked && !notHelpfulClicked){
             await axios.patch(
-                import.meta.env.VITE_BASE_URL + `/api/posts/upvote_post/${review._id}/${userLoggedIn._id}`
+                import.meta.env.VITE_BASE_URL + `/api/posts/upvote_post/${review._id}/${userLoggedIn._id}`, {}, config
             ).then((res) => {
                 console.log(res.data);
                 console.log("UPVOTED SUCCESS");
@@ -70,9 +81,16 @@ const CommentCard = ({ setStoreReviews, review, ownerID, userLoggedIn }) => {
     const handleUndoUpvote = async (event) => {
         event.preventDefault();
 
+        const config = {
+            headers: {
+              "Authorization": `Bearer ${user.token}`, // Replace with your actual access token
+              "Content-Type": "multipart/form-data",
+            },
+          };
+
         if(helpfulClicked && !notHelpfulClicked){
             await axios.patch(
-                import.meta.env.VITE_BASE_URL + `/api/posts/undo_upvote_post/${review._id}/${userLoggedIn._id}`
+                import.meta.env.VITE_BASE_URL + `/api/posts/undo_upvote_post/${review._id}/${userLoggedIn._id}`, {}, config
             ).then((res) => {
                 console.log(res.data);
                 console.log("UNDO UPVOTE SUCCESS");
@@ -89,9 +107,16 @@ const CommentCard = ({ setStoreReviews, review, ownerID, userLoggedIn }) => {
     const handleDownvote = async (event) => {
         event.preventDefault();
 
+        const config = {
+            headers: {
+              "Authorization": `Bearer ${user.token}`, // Replace with your actual access token
+              "Content-Type": "multipart/form-data",
+            },
+          };
+
         if(!notHelpfulClicked && !helpfulClicked){
             await axios.patch(
-                import.meta.env.VITE_BASE_URL + `/api/posts/downvote_post/${review._id}/${userLoggedIn._id}`
+                import.meta.env.VITE_BASE_URL + `/api/posts/downvote_post/${review._id}/${userLoggedIn._id}`, {}, config
             ).then((res) => {
                 console.log(res.data);
 
@@ -111,9 +136,16 @@ const CommentCard = ({ setStoreReviews, review, ownerID, userLoggedIn }) => {
     const handleUndoDownvote = async (event) => {
         event.preventDefault();
 
+        const config = {
+            headers: {
+              "Authorization": `Bearer ${user.token}`, // Replace with your actual access token
+              "Content-Type": "multipart/form-data",
+            },
+          };
+
         if(notHelpfulClicked && !helpfulClicked){
             await axios.patch(
-                import.meta.env.VITE_BASE_URL + `/api/posts/undo_downvote_post/${review._id}/${userLoggedIn._id}`
+                import.meta.env.VITE_BASE_URL + `/api/posts/undo_downvote_post/${review._id}/${userLoggedIn._id}`, {}, config
             ).then((res) => {
                 console.log(res.data);
                 console.log("UNDO DOWNVOTE SUCCESS");
@@ -132,13 +164,20 @@ const CommentCard = ({ setStoreReviews, review, ownerID, userLoggedIn }) => {
         // Check if both title and review are provided
         event.preventDefault();
 
+        const config = {
+            headers: {
+              "Authorization": `Bearer ${user.token}`, // Replace with your actual access token
+              "Content-Type": "multipart/form-data",
+            },
+          };
+
         // Display loading notification
         toastID.current = toast.loading("Deleting Review...");
 
         await axios
             .delete(
                 import.meta.env.VITE_BASE_URL +
-                    `/api/posts/delete_post/${review._id}`
+                    `/api/posts/delete_post/${review._id}`, config
             )
             .then(() => {
                 toast.update(toastID.current, {

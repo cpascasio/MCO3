@@ -24,6 +24,14 @@ const ReviewModalOwner = ({ setComments, reviewID  }) => {
   const handlePostReview = async (event) => {
     // Check if both title and review are provided
     event.preventDefault();
+
+    const config = {
+      headers: {
+        "Authorization": `Bearer ${user.token}`, // Replace with your actual access token
+        "Content-Type": "multipart/form-data",
+      },
+    };
+
     if (title.trim() === "" || review.trim() === "") {
       toast("Please provide review and title", {
         type: "error",
@@ -45,6 +53,7 @@ const ReviewModalOwner = ({ setComments, reviewID  }) => {
     await axios.post(
       import.meta.env.VITE_BASE_URL + `/api/comments/create_comment/`,
       form,
+      config,
     )
       .then(() => {
         toast.update(toastID.current, {

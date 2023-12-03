@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import useProfileUpload from "../../../hooks/useProfileUpload";
+import { useUserContext } from "../../../hooks/useUserContext";
 
 const EditProfile = ({ imageSrc, userId, setRefetch, descriptionDefault }) => {
   const [open, setOpen] = useState(false);
@@ -9,6 +10,7 @@ const EditProfile = ({ imageSrc, userId, setRefetch, descriptionDefault }) => {
   const { uploadPhoto } = useProfileUpload();
   // Create a ref for the file input
   const fileInputRef = useRef(null);
+  const { user } = useUserContext();
 
   const handlePostReview = () => {
     // Check if both title and review are provided

@@ -7,7 +7,7 @@ import EditCommentModal from "../modal/edit-comment-modal";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useRef } from "react";
-
+import { useUserContext } from "../../../hooks/useUserContext";
 import Trash from "../../../public/assets/mdi_trash.svg";
 import useFetch from "../../../hooks/useFetch";
 
@@ -16,8 +16,10 @@ const CommentCardV2 = ({  setComments, comment, userLoggedIn }) => {
     const [notHelpfulClicked, setNotHelpfulClicked] = useState(false);
     const [helpfulCount, setHelpfulCount] = useState(comment.helpful); // State for helpful count
     const [notHelpfulCount, setNotHelpfulCount] = useState(comment.notHelpful); // State for not helpful count
-
+    const { user } = useUserContext();
     const { data: commentUser } = useFetch(`/api/users/id/${comment.userID}`);
+
+
 
     useEffect(() => {
         if (userLoggedIn) {
@@ -39,12 +41,19 @@ const CommentCardV2 = ({  setComments, comment, userLoggedIn }) => {
         // Check if both title and review are provided
         event.preventDefault();
 
+        const config = {
+            headers: {
+              "Authorization": `Bearer ${user.token}`, // Replace with your actual access token
+              "Content-Type": "multipart/form-data",
+            },
+          };
+
     // Display loading notification
     toastID.current = toast.loading("Deleting Comment...");
 
     
     await axios
-      .delete(import.meta.env.VITE_BASE_URL + `/api/comments/delete_comment/${comment._id}`)
+      .delete(import.meta.env.VITE_BASE_URL + `/api/comments/delete_comment/${comment._id}`, config)
       .then(() => {
         toast.update(toastID.current, {
           render: "Comment successfully deleted!!",
@@ -83,9 +92,16 @@ const CommentCardV2 = ({  setComments, comment, userLoggedIn }) => {
     const handleUpvote = async (event) => {
         event.preventDefault();
 
+        const config = {
+            headers: {
+              "Authorization": `Bearer ${user.token}`, // Replace with your actual access token
+              "Content-Type": "multipart/form-data",
+            },
+          };
+
         if(!helpfulClicked && !notHelpfulClicked){
             await axios.patch(
-                import.meta.env.VITE_BASE_URL + `/api/comments/upvote_comment/${comment._id}/${userLoggedIn._id}`
+                import.meta.env.VITE_BASE_URL + `/api/comments/upvote_comment/${comment._id}/${userLoggedIn._id}`, config
             ).then((res) => {
                 console.log(res.data);
                 console.log("UPVOTED SUCCESS");
@@ -103,9 +119,16 @@ const CommentCardV2 = ({  setComments, comment, userLoggedIn }) => {
     const handleUndoUpvote = async (event) => {
         event.preventDefault();
 
+        const config = {
+            headers: {
+              "Authorization": `Bearer ${user.token}`, // Replace with your actual access token
+              "Content-Type": "multipart/form-data",
+            },
+          };
+
         if(helpfulClicked && !notHelpfulClicked){
             await axios.patch(
-                import.meta.env.VITE_BASE_URL + `/api/comments/undo_upvote_comment/${comment._id}/${userLoggedIn._id}`
+                import.meta.env.VITE_BASE_URL + `/api/comments/undo_upvote_comment/${comment._id}/${userLoggedIn._id}`, config
             ).then((res) => {
                 console.log(res.data);
                 console.log("UNDO UPVOTE SUCCESS");
@@ -122,9 +145,16 @@ const CommentCardV2 = ({  setComments, comment, userLoggedIn }) => {
     const handleDownvote = async (event) => {
         event.preventDefault();
 
+        const config = {
+            headers: {
+              "Authorization": `Bearer ${user.token}`, // Replace with your actual access token
+              "Content-Type": "multipart/form-data",
+            },
+          };
+
         if(!notHelpfulClicked && !helpfulClicked){
             await axios.patch(
-                import.meta.env.VITE_BASE_URL + `/api/comments/downvote_comment/${comment._id}/${userLoggedIn._id}`
+                import.meta.env.VITE_BASE_URL + `/api/comments/downvote_comment/${comment._id}/${userLoggedIn._id}`, config
             ).then((res) => {
                 console.log(res.data);
 
@@ -144,9 +174,16 @@ const CommentCardV2 = ({  setComments, comment, userLoggedIn }) => {
     const handleUndoDownvote = async (event) => {
         event.preventDefault();
 
+        const config = {
+            headers: {
+              "Authorization": `Bearer ${user.token}`, // Replace with your actual access token
+              "Content-Type": "multipart/form-data",
+            },
+          };
+
         if(notHelpfulClicked && !helpfulClicked){
             await axios.patch(
-                import.meta.env.VITE_BASE_URL + `/api/comments/undo_downvote_comment/${comment._id}/${userLoggedIn._id}`
+                import.meta.env.VITE_BASE_URL + `/api/comments/undo_downvote_comment/${comment._id}/${userLoggedIn._id}`, config
             ).then((res) => {
                 console.log(res.data);
                 console.log("UNDO DOWNVOTE SUCCESS");
