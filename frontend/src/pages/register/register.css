@@ -1,0 +1,120 @@
+.register {
+    color: #9C1A1D;
+    text-shadow: 3px 3px 4px rgba(0, 0, 0, 0.15);
+    font-family: Inter, sans-serif;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.register-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.un {
+    width: 392px;
+    height: 46px;
+    flex-shrink: 0;
+    border-radius: 50px;
+    border: 2px solid #FFF6EA;
+    box-shadow: 5px 5px 4px 0px rgba(0, 0, 0, 0.15);
+    color: #690000;
+    font-family: Inter, sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    /* Adjust the position as needed */
+    background: #8D1214 url("/mdi_user.svg") no-repeat 10px center;
+    padding-left: 40px; /* Adjust as needed */
+}
+
+.un::before {
+    content: "";
+    background-image: url('/mdi_user.svg');
+    width: 20px; /* Adjust the size as needed */
+    height: 20px;
+    position: absolute;
+    left: 5px; /* Adjust the position as needed */
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.pw {
+    width: 392px;
+    height: 46px;
+    flex-shrink: 0;
+    border-radius: 50px;
+    border: 2px solid #FFF6EA;
+    background: #8D1214;
+    box-shadow: 5px 5px 4px 0px rgba(0, 0, 0, 0.15);
+    color: #690000;
+    font-family: Inter, sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    background: #8D1214 url("/mdi_password.svg") no-repeat 10px center;
+    padding-left: 40px; /* Adjust as needed */
+
+}
+
+.register-button {
+    border-radius: 70px;
+    border: 2px solid #8D1214;
+    background: #FFF6EA;
+    box-shadow: 3px 3px 4px 0px rgba(0, 0, 0, 0.15);
+    display: flex;
+    width: 125px;
+    height: 39px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    color: #690000;
+    font-family: Inter, sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+#signin {
+    color: #9C1A1D;
+    font-size: 11px;
+    font-family: Inter, sans-serif;
+    font-weight: 600;
+    word-wrap: break-word
+}
+
+#alreadyhave {
+    color: #885133;
+    font-size: 11px;
+    font-family: Inter, sans-serif;
+    font-weight: 400;
+    word-wrap: break-word
+}
+
+#signin:hover {
+    color: #9C1A1D;
+    text-decoration: underline;
+}
+
+#signin-container {
+    display: flex;
+    padding: 40px;
+}
+
+.reg-login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 30px;
+    padding: 20px;
+}

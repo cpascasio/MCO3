@@ -1,0 +1,9 @@
+.review-image {
+    height: 201px;
+    left: 17px;
+    object-fit: cover;
+    position: absolute;
+    top: 85px;
+    width: 353px;
+    border-radius: 0.5rem;
+}

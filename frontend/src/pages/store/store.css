@@ -1,0 +1,17 @@
+body{
+    background-color: '#f0e6d7';
+}
+
+.search-bar {
+    background-color: white;
+
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+  }
+  
+  .btn-show-all-stores {
+    margin-left: 10px; /* Adjust the margin as needed */
+  }

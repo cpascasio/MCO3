@@ -1,0 +1,85 @@
+body{
+    background-color: #FFF6EA;
+}
+
+.label {
+    height: 100%;
+    width: 100%;
+}
+
+.label .page-title-review {
+    color: #9c1a1d;
+    font-family: "Inter-SemiBold", Helvetica;
+    font-size: 3rem;
+    font-weight: 600;
+    height: 31px;
+    margin-left: 7rem;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+    width: 389px;
+    display: flex;
+    margin-top: 20px;
+}
+
+.box {
+    height: 46px;
+    position: relative;
+    width: 451px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+.no-results{
+    width: 100%;
+    text-align: center;
+    height: 50vh;
+}
+
+/* .box .search-bar {
+    background-color: #f4f0ec;
+    border: 1px solid;
+    border-color: #885133;
+    border-radius: 11px;
+    height: 46px;
+    margin-left: 7rem;
+    width: 451px;
+} */
+
+/* .write-review-button {
+    height: 47px;
+    width: 242px;
+    margin-right: 7rem;
+}
+
+.write-review-button .overlap-group-wrapper {
+    height: 47px;
+    width: 244px;
+    
+}
+
+.write-review-button .overlap-group {
+    background-color: #885133;
+    border-radius: 11px;
+    height: 47px;
+    position: relative;
+    width: 242px;
+}
+
+.write-review-button .text-wrapper {
+    color: #ffffff;
+    font-family: "Inter-SemiBold", Helvetica;
+    font-size: 23px;
+    font-weight: 600;
+    height: 36px;
+    left: 4px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 5px;
+    width: 238px;
+} */
+
+
+

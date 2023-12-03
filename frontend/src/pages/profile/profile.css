@@ -1,0 +1,62 @@
+.user-page {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.profile-picture {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+h1 {
+    font-size: 24px;
+    margin-top: 0;
+}
+
+p {
+    font-size: 16px;
+}
+
+.reviews {
+    list-style: none;
+    padding: 0;
+}
+
+.reviews li {
+    margin-bottom: 10px;
+}
+
+.reviews h3 {
+    font-size: 20px;
+}
+
+.reviews p {
+    font-size: 16px;
+}
+
+.badges {
+    list-style: none;
+    padding: 0;
+}
+
+.badges li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.badges li::before {
+    content: '#';
+    color: #ccc;
+}
+
+.following {
+    font-size: 16px;
+}
+
+.followers {
+    font-size: 16px;
+}
+
+

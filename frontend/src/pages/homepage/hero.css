@@ -1,0 +1,7 @@
+.custom-input::placeholder {
+    color: #b78465;
+}
+
+input:focus {
+    color: #b78465; /* Change this to your desired text color */
+  }

@@ -1,0 +1,233 @@
+.review-box {
+    background-color: #f4f0ec;
+    border: 1px solid;
+    border-color: #885133;
+    border-radius: 11px;
+    height: 483px;
+    position: relative;
+    width: 389px;
+    margin: 10px;
+
+    /* New styles for adjusting top position when there is no image */
+    &.no-image {
+        .restaurant-name {
+          top: 90px;
+        }
+        .restaurant-image {
+            top: 87px;
+        }
+        .stars-wrapper{
+            top: 118px;
+        }
+        .overlap-group {
+            top: 155px;
+        }
+        .votes{
+            top: 365px;
+        }
+
+      }
+}
+
+.custom-hr {
+    border: 0.5px solid #885133;
+    top: 110px;
+    margin-top: 77px; /* Adjust as needed */
+  }
+
+.review-box .profile-icon {
+    height: 50px;
+    left: 18px;
+    object-fit: cover;
+    position: absolute;
+    top: 17px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+.review-box .text-wrapper {
+    color: #885133;
+    font-family: "Inter-SemiBold", Helvetica;
+    font-size: 20px;
+    font-weight: 600;
+    height: 28px;
+    left: 68px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 27px;
+    margin-left: 8px;
+}
+
+.review-box .review-image {
+    height: 201px;
+    left: 17px;
+    object-fit: cover;
+    position: absolute;
+    top: 85px;
+    width: 353px;
+    border-radius: 0.5rem;
+}
+
+.review-box .restaurant-image {
+    height: 22px;
+    left: 17px;
+    object-fit: cover;
+    position: absolute;
+    top: 302px;
+    width: 22px;
+    border-radius: 50%;
+    /* top: 85px;  when no image*/
+}
+
+.restaurant-name {
+    color: #885133;
+    font-family: "Inter-SemiBold", Helvetica;
+    font-size: 17px;
+    font-weight: 600;
+    height: 28px;
+    left: 39px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 304px;
+    width: 165px;
+    margin-left: 10px;
+    text-align: left; /* Add this line to center-align the text */
+    vertical-align: middle;
+}
+
+.stars-wrapper{
+    position: absolute;
+    top: 330px; /* Adjust the top value to control the vertical position */
+    left: 15px; /* Adjust the left value to control the horizontal position */
+}
+
+.review-box .overlap-group {
+    height: 100px;
+    left: 18px;
+    position: absolute;
+    top: 354px;
+    width: 350px;
+}
+
+.overlap-group .review-title {
+    color: #000000;
+    font-family: "Inter-Bold", Helvetica;
+    font-size: 17px;
+    font-weight: 700;
+    height: 28px;
+    left: 0;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 0;
+    width: 350px;
+}
+
+.overlap-group .review-body {
+    color: #000000;
+    font-family: "Inter-Regular", Helvetica;
+    font-size: 17px;
+    font-weight: 400;
+    letter-spacing: 0;
+    position: absolute;
+    top: 27px;
+    left: 0;
+    width: 350px;
+    height: 80px; /* Set a fixed height */
+    /* overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: pre-line; To preserve newlines in the text */
+    overflow-wrap: break-word;
+}
+
+.review-box .votes{
+    /* background-color: #885133; */
+    position: relative;
+    top: 440px;
+}
+
+
+.votes .helpful-btn {
+    height: 24px;
+    position: relative;
+    width: 50px;
+    /* top: 447px; */
+}
+
+.votes .helpful-btn .helpful-ctr {
+    color: #885133;
+    font-size: 17px;
+    font-weight: 600;
+    height: 23px;
+    left: 38px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 1px;
+    width: 26px;
+}
+
+.votes .helpful-btn .mdi-helpful-outline {
+    height: 24px;
+    left: 16px;
+    position: absolute;
+    /* top: 447px; */
+    width: 24px;
+}
+
+.votes .nothelpful-btn {
+    height: 24px;
+    position: relative;
+    width: 50px;
+    /* top: 424px; */
+    left: 68px;
+    bottom: 1.5rem;
+}
+
+.votes .nothelpful-btn .nothelpful-ctr {
+    color: #885133;
+    font-size: 17px;
+    font-weight: 600;
+    height: 23px;
+    /* left: 24px; */
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    /* top: 424px; */
+    left: 30px;
+}
+
+.votes .nothelpful-btn .mdi-not-helpful {
+    height: 24px;
+    /* left: 68px; */
+    position: absolute;
+    /* top: 422px; */
+    width: 24px;
+}
+
+
+/* .review-box .mdi-helpful-outline.disabled {
+    pointer-events: none; 
+    opacity: 0.5; 
+}
+
+.review-box .mdi-not-helpful.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+} */
+
+.helpful-btn .mdi-helpful-outline,
+.nothelpful-btn .mdi-not-helpful {
+    cursor: default;
+}
+
+
+
+
+
+

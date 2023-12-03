@@ -1,0 +1,78 @@
+/* UserReviewBox.css */
+
+/* UserReviewBox.css */
+.review-box2 {
+    border: 3px solid #e7ded3;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 10px;
+    margin-left: 20px;
+    width: 300px;
+    height: 400px; /* Set a fixed height for the review box */
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+  
+    &:hover {
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+}
+  
+.content-wrapper {
+    display: flex;
+}
+  
+.image-wrapper {
+    flex-shrink: 0;
+    margin-right: 10px;
+}
+  
+.restaurant-image2 {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #b78465;
+}
+  
+.text-wrapper2 {
+    font-weight: bold;
+    margin-left: 10px;
+}
+  
+.review-image2 {
+    max-width: 100%;
+    max-height: 150px; /* Set the maximum height for the review image */
+    object-fit: cover;
+    width: 100%; /* Ensure the image takes 100% of the container width */
+    margin-top: 10px;
+    display: block; /* Default to block display */
+}
+  
+.review-box2.no-image .review-image2 {
+    display: none; /* Hide review image if the no-image class is present */
+}
+  
+.restaurant-name2 {
+    color: #9c1a1d;
+    font-weight: bold;
+    margin-top: 5px;
+}
+  
+.review-title2 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+  
+.review-body2 {
+    margin-top: 5px;
+}
+  
+.overlap {
+    margin-top: 10px;
+}
+  
+.stars-wrapper2 {
+    margin-top: 5px;
+}
+  

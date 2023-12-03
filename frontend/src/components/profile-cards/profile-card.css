@@ -1,0 +1,61 @@
+.frame {
+  background-color: #f0e6d7;
+  border-radius: 37px;
+  height: 682px;
+  width: 70%; /* Reduce the width */
+  margin: 3rem auto; /* Center horizontally and adjust margin as needed */
+  display: flex;
+  flex-direction: column; /* Vertically stack the children */
+  align-items: center; /* Center horizontally */
+  justify-content: center; /* Center vertically */
+  text-align: center; /* Center text */
+  position: relative;
+}
+
+.frame .profile-icon {
+  height: 371px;
+  width: 371px;
+  border-radius: 50%; /* Center the image within the container */
+  object-fit: cover;
+  position: relative; /* Use relative for centering within .frame */
+}
+
+.frame .overlap-group {
+  width: 377px;
+  text-align: center; /* Center text */
+  position: relative; /* Use relative for centering within .frame */
+}
+
+.frame .review-body {
+  color: #9c1a1d;
+  font-family: "Inter-ExtraBold", Helvetica;
+  font-size: 46px;
+  font-weight: 800;
+  line-height: normal;
+  margin-top: 1rem;
+}
+
+.frame .text-wrapper {
+  color: #f06e71;
+  font-family: "Inter-Regular", Helvetica;
+  font-size: 21px;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.frame .desc {
+  color: #885133;
+  font-family: "Inter-Medium", Helvetica;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center; /* Center text */
+  line-height: normal;
+  /* width: 50%; */
+  margin-top: 8rem;
+}
+
+.edit-profile-button {
+  position: absolute;
+  top: 2rem; /* Adjust as needed */
+  right: 1.5rem; /* Adjust as needed */
+}

@@ -1,0 +1,51 @@
+body{
+    margin: 0;
+    background-color: #f4f0ec;
+}
+
+#search-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+}
+
+.fas.fa-search {
+    /* font-size: 20px; */
+    margin-right: 10px;
+    color: #885133;
+}
+
+.searchbar {
+    width: 300px;
+    /* padding: 10px; */
+    border: 1px solid #885133;
+    border-radius: 5px;
+    outline: none;
+    font-size: 16px;
+}
+
+#search-button {
+    background-color: #fff;
+    color: #d62300;
+    border: 1px solid #d62300; 
+    border-radius: 5px;
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#search-button:hover {
+    background-color: #d62300;
+    color: #fff;
+    border: 1px solid #fff;
+}
+
+#people-section{
+    display: grid;
+    background-color: #d62300;
+    width: 100%;
+}
+
+
+  
