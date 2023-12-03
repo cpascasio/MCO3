@@ -83,18 +83,25 @@ const createUser = async (req, res) => {
       password: hashedPassword,
     });
 
+    console.log("USER: ");
+    console.log(user);
+
     const token = createToken(user._id);
+
+    console.log("TOKEN: ");
+    console.log(token);
 
     return res.status(200).json({
       message: "User created successfully!",
       state: "success",
-      id: users._id,
-        username: users.username,
-        image: users.image,
+      id: user._id,
+        username: user.username,
+        image: user.image,
         token: token,
     });
 
   } catch (e) {
+    console.log(e);
     return res.status(500).json({
       message: "Encountered an error!",
       state: "error",

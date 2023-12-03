@@ -53,7 +53,7 @@ const CommentCardV2 = ({  setComments, comment, userLoggedIn }) => {
 
     
     await axios
-      .delete(import.meta.env.VITE_BASE_URL + `/api/comments/delete_comment/${comment._id}`, config)
+      .delete(import.meta.env.VITE_BASE_URL + `/api/comments/delete_comment/${comment._id}`, {}, config)
       .then(() => {
         toast.update(toastID.current, {
           render: "Comment successfully deleted!!",
@@ -99,9 +99,12 @@ const CommentCardV2 = ({  setComments, comment, userLoggedIn }) => {
             },
           };
 
+          console.log("TOKEN");
+          console.log(user.token);
+
         if(!helpfulClicked && !notHelpfulClicked){
             await axios.patch(
-                import.meta.env.VITE_BASE_URL + `/api/comments/upvote_comment/${comment._id}/${userLoggedIn._id}`, config
+                import.meta.env.VITE_BASE_URL + `/api/comments/upvote_comment/${comment._id}/${userLoggedIn._id}`, {}, config
             ).then((res) => {
                 console.log(res.data);
                 console.log("UPVOTED SUCCESS");
@@ -128,7 +131,7 @@ const CommentCardV2 = ({  setComments, comment, userLoggedIn }) => {
 
         if(helpfulClicked && !notHelpfulClicked){
             await axios.patch(
-                import.meta.env.VITE_BASE_URL + `/api/comments/undo_upvote_comment/${comment._id}/${userLoggedIn._id}`, config
+                import.meta.env.VITE_BASE_URL + `/api/comments/undo_upvote_comment/${comment._id}/${userLoggedIn._id}`, {}, config
             ).then((res) => {
                 console.log(res.data);
                 console.log("UNDO UPVOTE SUCCESS");
@@ -154,7 +157,7 @@ const CommentCardV2 = ({  setComments, comment, userLoggedIn }) => {
 
         if(!notHelpfulClicked && !helpfulClicked){
             await axios.patch(
-                import.meta.env.VITE_BASE_URL + `/api/comments/downvote_comment/${comment._id}/${userLoggedIn._id}`, config
+                import.meta.env.VITE_BASE_URL + `/api/comments/downvote_comment/${comment._id}/${userLoggedIn._id}`, {}, config
             ).then((res) => {
                 console.log(res.data);
 
@@ -183,7 +186,7 @@ const CommentCardV2 = ({  setComments, comment, userLoggedIn }) => {
 
         if(notHelpfulClicked && !helpfulClicked){
             await axios.patch(
-                import.meta.env.VITE_BASE_URL + `/api/comments/undo_downvote_comment/${comment._id}/${userLoggedIn._id}`, config
+                import.meta.env.VITE_BASE_URL + `/api/comments/undo_downvote_comment/${comment._id}/${userLoggedIn._id}`, {}, config
             ).then((res) => {
                 console.log(res.data);
                 console.log("UNDO DOWNVOTE SUCCESS");
