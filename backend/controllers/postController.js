@@ -50,6 +50,8 @@ const searchPosts = async (req, res) => {
             .map((keyword) => `(?=.*\\b${keyword}\\b)`)
             .join("")
 
+    
+
         const posts = await Post.find({
             $or: [
                 {
@@ -142,15 +144,11 @@ const modifiedGetPosts = async (req, res) => {
                 ],
             })
                 .sort({ title: -1 })
-                .skip(page * postPerPage)
-                .limit(postPerPage)
 
             console.log(posts)
         } else {
             posts = await Post.find({})
                 .sort({ title: -1 })
-                .skip(page * postPerPage)
-                .limit(postPerPage)
         }
         const storeIDs = posts.map((post) => post.storeID)
         const posters = posts.map((post) => post.userID)
