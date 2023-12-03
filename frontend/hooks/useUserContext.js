@@ -1,4 +1,4 @@
-import { UserContext } from "../../frontend/src/context/UserContext"
+import { UserContext } from "/public/usercontext"
 import { useContext } from "react"
 
 export const useUserContext = () => {

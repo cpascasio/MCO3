@@ -1,6 +1,6 @@
 // Layout.js
 import React from "react";
-import { UserProvider } from "../src/context/UserContext";
+import { UserProvider } from "../public/usercontext.jsx";
 import FlipNavWrapper from "../src/components/navbar/FlipNav";
 import PageRouter from "../src/components/PageRouter";
 import Footer from "../src/components/footer/Footer";

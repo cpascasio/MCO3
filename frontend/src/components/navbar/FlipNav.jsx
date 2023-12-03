@@ -2,7 +2,7 @@ import { color, motion } from "framer-motion";
 import { useState } from "react";
 import { FiArrowRight, FiMenu, FiSearch } from "react-icons/fi";
 import "./nav.css";
-import { useUser } from "../../context/UserContext";
+import { useUser } from "/public/usercontext";
 import { useUserContext } from "../../../hooks/useUserContext";
 
 const logo = "/logo.svg";
