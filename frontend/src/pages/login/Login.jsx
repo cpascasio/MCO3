@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import { useUser } from "../../../public/usercontext.jsx";
+import { useUser } from "../../../src/context/UserContext.jsx";
 import "./login.css";
 import { toast } from "react-toastify";
 import useLogin from "../../../hooks/useLogin.js";
