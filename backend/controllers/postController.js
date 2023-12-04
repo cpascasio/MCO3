@@ -126,22 +126,25 @@ const modifiedGetPosts = async (req, res) => {
             }
             const arrayKeywords = keywords.split(" ")
 
-            const pattern = arrayKeywords.map((keyword) => new RegExp(keyword))
+            const pattern = arrayKeywords.map((keyword) => new RegExp(escapeRegExp(keyword), 'i'));
 
-            console.log(pattern)
-            posts = await Post.find({
-                $or: [
-                    {
-                        title: {
-                            $in: pattern,
-                        },
-                        body: {
-                            $in: pattern,
-                        },
-                    },
-                ],
-            })
-                .sort({ title: -1 })
+    console.log(pattern.map((pattern) => pattern.toString()));
+
+    posts = await Post.find({
+        $or: [
+            {
+                title: {
+                    $regex: new RegExp(pattern.map(p => `(${p.source})`).join('|'), 'i'),
+                },
+            },
+            {
+                body: {
+                    $regex: new RegExp(pattern.map(p => `(${p.source})`).join('|'), 'i'),
+                },
+            },
+        ],
+    })
+    .sort({ title: -1 })
                 .skip(page * postPerPage)
                 .limit(postPerPage)
 
