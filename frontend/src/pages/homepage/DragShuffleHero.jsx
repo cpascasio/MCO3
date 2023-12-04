@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import "./hero.css";
 import useFetch from "../../../hooks/useFetch";
 
-const DragShuffleHero = () => {
+const DragShuffleHero = ({reviews}) => {
+    const reversedReviews = reviews ? [...reviews].reverse() : [];
     const dragProgress = useMotionValue(0);
     const [order, setOrder] = useState(["front", "middle", "back"]);
     const [dragging, setDragging] = useState(false);
@@ -80,36 +81,22 @@ const DragShuffleHero = () => {
                     whileTap={{ scale: 0.985 }}
                     className="relative h-[450px] w-[350px]"
                 >
-                    <Card
-                        imgUrl="https://res.cloudinary.com/dpzerkzhi/image/upload/v1701666823/assets/26798746d248b5f37d9dbacaa339fc78.jpg"
-                        testimonial="This is the best!"
-                        author="Ola Frango"
-                        handleDragEnd={handleDragEnd}
-                        dragProgress={dragProgress}
-                        position={order[0]}
-                        dragging={dragging}
-                        setDragging={setDragging}
-                    />
-                    <Card
-                        imgUrl="https://res.cloudinary.com/dpzerkzhi/image/upload/v1701666839/assets/e8c9efbd536c69cd5ed9fd7f7e5f0b53.jpg"
-                        testimonial="The best chicken!"
-                        author="24 Chicken"
-                        handleDragEnd={handleDragEnd}
-                        dragProgress={dragProgress}
-                        position={order[1]}
-                        dragging={dragging}
-                        setDragging={setDragging}
-                    />
-                    <Card
-                        imgUrl="https://res.cloudinary.com/dpzerkzhi/image/upload/v1701666828/assets/77f2fb5fa41242558d547ec4f6a924f0.jpg"
-                        testimonial="Best tacos!"
-                        author="El Poco"
-                        handleDragEnd={handleDragEnd}
-                        dragProgress={dragProgress}
-                        position={order[2]}
-                        dragging={dragging}
-                        setDragging={setDragging}
-                    />
+
+                    {/* Check if reviews is not null or undefined before mapping */}
+                    {reversedReviews &&
+                        reversedReviews.map((review, index) => (
+                            <Card
+                                key={index}
+                                imgUrl={review.storeImage}
+                                testimonial={review.title}
+                                author={review.storeName}
+                                handleDragEnd={handleDragEnd}
+                                dragProgress={dragProgress}
+                                position={order[index]}
+                                dragging={dragging}
+                                setDragging={setDragging}
+                            />
+                        ))}
                 </motion.div>
             </div>
         </section>
