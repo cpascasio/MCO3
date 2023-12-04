@@ -82,7 +82,7 @@ const Reviews = () => {
         }
 
         setCurrentPage((old) => old - 1);
-        setSearchParams({ page: `${currentPage - 1}` });
+        setSearchParams({ page: `${currentPage - 1}`, keywords: `${searchParams.get("keywords")}` });
     };
 
     const handleForward = (e) => {
@@ -97,7 +97,7 @@ const Reviews = () => {
         }
 
         setCurrentPage((old) => old + 1);
-        setSearchParams({ page: `${currentPage + 1}` });
+        setSearchParams({ page: `${currentPage + 1}`, keywords: `${searchParams.get("keywords")}` });
     };
 
     
