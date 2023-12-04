@@ -72,7 +72,7 @@ const DragShuffleHero = ({reviews}) => {
                     >
                         Discover the perfect{" "}
                         <span style={{ color: "#f49294" }}> Taft </span>{" "}
-                        restaurant to statisfy your taste{" "}
+                        restaurant to satisfy your taste{" "}
                         <span style={{ color: "#f49294" }}> buds </span>!
                     </p>
                 </div>

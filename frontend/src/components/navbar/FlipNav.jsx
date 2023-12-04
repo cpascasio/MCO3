@@ -63,6 +63,7 @@ const NavLeft = ({ setIsOpen }) => {
           <Logo />
         </a>
       </div>
+      <NavLink text="About" href="/about" />
       <NavLink text="Explore" href="/store" />
       <NavLink text="Reviews" href="/reviews" />
       {/* <NavLink text="Company" /> */}
@@ -177,6 +178,7 @@ const NavMenu = ({ isOpen }) => {
       animate={isOpen ? "open" : "closed"}
       className="absolute p-4 bg-white shadow-lg left-0 right-0 top-full origin-top flex flex-col gap-4"
     >
+      <MenuLink text="About" href="/about" />
       <MenuLink text="Explore" href="/store" />
       <MenuLink text="Reviews" href="/reviews" />
       {/* <MenuLink text="Community" href="/people" /> */}
