@@ -36,7 +36,7 @@ const Homepage = () => {
     <>
       {/* Hero Section */}
       <div>
-        <DragShuffleHero />
+        <DragShuffleHero reviews={reviewData}/>
       </div>
 
       {/* Trending Restaurants */}

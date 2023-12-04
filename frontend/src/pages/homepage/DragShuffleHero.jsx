@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import "./hero.css";
 import useFetch from "../../../hooks/useFetch";
 
-const DragShuffleHero = () => {
+const DragShuffleHero = ({reviews}) => {
+    const reversedReviews = reviews ? [...reviews].reverse() : [];
     const dragProgress = useMotionValue(0);
     const [order, setOrder] = useState(["front", "middle", "back"]);
     const [dragging, setDragging] = useState(false);
@@ -80,36 +81,21 @@ const DragShuffleHero = () => {
                     whileTap={{ scale: 0.985 }}
                     className="relative h-[450px] w-[350px]"
                 >
-                    <Card
-                        imgUrl="/olafrango.jpeg"
-                        testimonial="This is the best!"
-                        author="Ola Frango"
-                        handleDragEnd={handleDragEnd}
-                        dragProgress={dragProgress}
-                        position={order[0]}
-                        dragging={dragging}
-                        setDragging={setDragging}
-                    />
-                    <Card
-                        imgUrl="/24chicken.jpeg"
-                        testimonial="The best chicken!"
-                        author="24 Chicken"
-                        handleDragEnd={handleDragEnd}
-                        dragProgress={dragProgress}
-                        position={order[1]}
-                        dragging={dragging}
-                        setDragging={setDragging}
-                    />
-                    <Card
-                        imgUrl="/el-poco.jpeg"
-                        testimonial="Best tacos!"
-                        author="El Poco"
-                        handleDragEnd={handleDragEnd}
-                        dragProgress={dragProgress}
-                        position={order[2]}
-                        dragging={dragging}
-                        setDragging={setDragging}
-                    />
+                    {/* Check if reviews is not null or undefined before mapping */}
+                    {reversedReviews &&
+                        reversedReviews.map((review, index) => (
+                            <Card
+                                key={index}
+                                imgUrl={review.storeImage}
+                                testimonial={review.title}
+                                author={review.storeName}
+                                handleDragEnd={handleDragEnd}
+                                dragProgress={dragProgress}
+                                position={order[index]}
+                                dragging={dragging}
+                                setDragging={setDragging}
+                            />
+                        ))}
                 </motion.div>
             </div>
         </section>
