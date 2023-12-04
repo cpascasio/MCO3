@@ -44,7 +44,7 @@ const DragShuffleHero = () => {
             style={{
                 pointerEvents: dragging ? "none" : undefined,
                 padding: "120px 0px",
-                backgroundImage: 'url("/taft3.svg")', // Replace with your image path
+                backgroundImage: 'url("assets/c1637ca8b47368ded7fede4fb87fd395")', // Replace with your image path
                 backgroundSize: "cover", // You can adjust this property
                 //backgroundAttachment: 'fixed', // Add this line
                 backgroundRepeat: "no-repeat", // You can adjust this property
