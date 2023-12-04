@@ -277,8 +277,8 @@ const CommentCard = ({ setStoreReviews, review, ownerID, userLoggedIn }) => {
                                 alt="Mdi helpful outline"
                                 src={
                                     helpfulClicked
-                                        ? "../../../public/assets/mdi-helpful-outline-clicked.svg"
-                                        : "../../../public/assets/mdi-helpful-outline.svg"
+                                        ? "https://res.cloudinary.com/dpzerkzhi/image/upload/v1701688984/assets/387fdf5dfd84b43308fc6cba3a6732ca.svg"
+                                        : "https://res.cloudinary.com/dpzerkzhi/image/upload/v1701688984/assets/99ecb77ccd1ee8378c52c3422bcebe20.svg"
                                 }
                                 onClick={userLoggedIn && (helpfulClicked ? handleUndoUpvote : handleUpvote)}
                                 title="Helpful"
@@ -298,8 +298,8 @@ const CommentCard = ({ setStoreReviews, review, ownerID, userLoggedIn }) => {
                                 alt="Mdi not helpful"
                                 src={
                                     notHelpfulClicked
-                                        ? "../../../public/assets/mdi-not-helpful-outline-clicked.svg"
-                                        : "../../../public/assets/mdi-not-helpful-outline.svg"
+                                        ? "https://res.cloudinary.com/dpzerkzhi/image/upload/v1701689055/assets/5db701d948ba98f09175e7f2bc44a2bd.svg"
+                                        : "https://res.cloudinary.com/dpzerkzhi/image/upload/v1701689055/assets/77508c01ac162c3d09d49fa1241810df.svg"
                                 }
                                 onClick={userLoggedIn && (notHelpfulClicked ? handleUndoDownvote : handleDownvote)}
                                 title="Not Helpful"

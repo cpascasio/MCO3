@@ -235,8 +235,8 @@ const CommentCardV2 = ({  setComments, comment, userLoggedIn }) => {
                                 alt="Mdi helpful outline"
                                 src={
                                     helpfulClicked
-                                        ? "../../../public/assets/store-like-shaded.svg"
-                                        : "../../../public/assets/store-like-outline.svg"
+                                        ? "https://res.cloudinary.com/dpzerkzhi/image/upload/v1701689569/assets/9d5694d051586762054f03cf16a7a18c.svg"
+                                        : "https://res.cloudinary.com/dpzerkzhi/image/upload/v1701689569/assets/549d709da7287a258e42a78d02fd1f5d.svg"
                                 }
                                 onClick={userLoggedIn && (helpfulClicked ? handleUndoUpvote : handleUpvote)}
                                 title="Helpful"
@@ -253,8 +253,8 @@ const CommentCardV2 = ({  setComments, comment, userLoggedIn }) => {
                                 alt="Mdi not helpful"
                                 src={
                                     notHelpfulClicked
-                                        ? "../../../public/assets/store-dislike-shaded.svg"
-                                        : "../../../public/assets/store-dislike-outline.svg"
+                                        ? "https://res.cloudinary.com/dpzerkzhi/image/upload/v1701689569/assets/f3ede81de26052f51a9ef118440b3719.svg"
+                                        : "https://res.cloudinary.com/dpzerkzhi/image/upload/v1701689569/assets/6c9eed90281c132343ba5675b273b6a0.svg"
                                 }
                                 onClick={userLoggedIn && (notHelpfulClicked ? handleUndoDownvote : handleDownvote)}
                                 title="Not Helpful"
