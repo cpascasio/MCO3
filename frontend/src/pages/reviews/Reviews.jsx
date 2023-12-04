@@ -12,7 +12,10 @@ import "./reviews.css";
 const Reviews = () => {
     const [selectedFilter, setSelectedFilter] = useState("0");
     const [refetch, setRefetch] = useState(false); // Define refetch state
-    const [searchParams, setSearchParams] = useSearchParams({});
+    const [searchParams, setSearchParams] = useSearchParams({
+        page: "0",
+        keywords: "",
+    });
     const [currentPage, setCurrentPage] = useState(0);
     const [search, setSearch] = useState("");
     const { data: review } = useFetch(
