@@ -109,3 +109,27 @@
     display: flex;
     padding: 40px;
 }
+
+.rememberme-container {
+    display: flex;
+    align-items: center; 
+    padding: 20px 0;
+}
+
+#rememberMeCheckbox {
+    margin-right: 10px; 
+    background-color: #FFF6EA;
+}
+
+#rememberMeCheckbox:hover{
+    cursor: pointer;
+}
+
+.rememberMe {
+    color: #9C1A1D;
+    font-size: 12px; 
+    font-family: Inter, sans-serif;
+    font-weight: 600;
+    word-wrap: break-word;
+}
+

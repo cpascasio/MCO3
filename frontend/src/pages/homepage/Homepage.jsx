@@ -9,12 +9,11 @@ const Homepage = () => {
 
   const { data:reviews } = useFetch("/api/posts/get_posts");
 
-  const { data:stores } = useFetch("/api/stores/get_stores");
+  const { data:storeData } = useFetch("/api/stores");
 
   useEffect(() => {
     
       console.log(reviews);
-      console.log(stores);
   }, [reviews]);
 
   const { user } = useUserContext();
@@ -26,8 +25,16 @@ const Homepage = () => {
   } = useFetch("/api/posts/get_modified_posts");
 
   useEffect(() => {
-    console.log(reviewData);
+    console.log('HOMEPAGE REVIEW DATA: ',reviewData);
   }, [reviewData]);
+
+  useEffect(() => {
+    console.log('HOMEPAGE STORE DATA: ', storeData);
+  }, [storeData]);
+
+  useEffect(() => {
+    console.log('Number of fetched stores: ', storeData?.length || 0);
+  }, [storeData]);
 
   useEffect(() => {
     console.log(user?.id);
@@ -41,7 +48,7 @@ const Homepage = () => {
 
       {/* Trending Restaurants */}
       <div>
-        <CardCarousel />
+        <CardCarousel stores={storeData} length={storeData?.length || 0}/>
       </div>
 
       {/* Latest Reviews */}
