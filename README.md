@@ -1,13 +1,6 @@
 # CCAPDEV S17
 # Armada, Lualhati, Lababidi, Pascasio
-In order to view the application, do the following steps:
 
-Step 1: Open your terminal
-Step 2: Change directory to the backend by using the "cd backend" command
-Step 3: Execute the "npm run start" command
-Step 4: Open another terminal
-Step 5: Change directory to the frontend by using the "cd frontend" command
-Step 6: Execute the "npm run dev" command
-Step 7: Open/copy the local URL on to your web browser to view the application — http://localhost:5173/
+Taft Buds is a restaurant review website that focuses on the food stores and restaurants around Taft Ave., Manila. It is built to cater the dynamic community where locals and visitors alike contribute their insights, helping you find the ideal dining spot tailored to your preferences.
 
-NOTE: The data may take too long to display, if that happens you can refresh the page.
+In order to Taft Buds website, you can simply go to this link: https://taftbuds.vercel.app/
