@@ -32,6 +32,14 @@ const Login = () => {
         console.log(password)
     }
 
+     // State to track the "Remember Me" checkbox
+  const [rememberMe, setRememberMe] = useState(false);
+
+  // Function to toggle the "Remember Me" state
+  const toggleRememberMe = () => {
+    setRememberMe(!rememberMe);
+  };
+
     useEffect(() => {user ? router(`/`) : ''}, [user])
     
     return (
@@ -60,6 +68,18 @@ const Login = () => {
                             onChange={(e) => setPassword(e.target.value)}
                             style={{color: '#FFF6EA'}}
                         />
+                        <div className="rememberme-container">
+                            {/* "Remember Me" Checkbox */}
+                            <input
+                                type="checkbox"
+                                id="rememberMeCheckbox"
+                                checked={rememberMe}
+                                onChange={toggleRememberMe}
+                            />
+                            <label htmlFor="rememberMeCheckbox" className="rememberMe">Remember Me</label>
+                        
+                        </div>
+
                         <div className="signup-container">
                             <a href="/register" className="signup">
                                 <span id='donthave'>Don't have an account?</span> <span id={'signup'}> Sign up Now! </span>
