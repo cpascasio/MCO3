@@ -124,30 +124,39 @@ const modifiedGetPosts = async (req, res) => {
             escapeRegExp = (text) => {
                 return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&")
             }
+
+            console.log("TEXT");
+            console.log(`_${keywords}_`);
             const arrayKeywords = keywords.split(" ")
 
-            const pattern = arrayKeywords.map((keyword) => new RegExp(keyword))
+            const pattern = arrayKeywords.map((keyword) => new RegExp(escapeRegExp(keyword), 'i'));
 
-            console.log(pattern)
-            posts = await Post.find({
-                $or: [
-                    {
-                        title: {
-                            $in: pattern,
-                        },
-                        body: {
-                            $in: pattern,
-                        },
-                    },
-                ],
-            })
-                .sort({ title: -1 })
+    console.log(pattern.map((pattern) => pattern.toString()));
+
+    posts = await Post.find({
+        $or: [
+            {
+                title: {
+                    $regex: new RegExp(pattern.map(p => `(${p.source})`).join('|'), 'i'),
+                },
+            },
+            {
+                body: {
+                    $regex: new RegExp(pattern.map(p => `(${p.source})`).join('|'), 'i'),
+                },
+            },
+        ],
+    })
+    .sort({ title: -1 });
+
 
             console.log(posts)
         } else {
             posts = await Post.find({})
                 .sort({ title: -1 })
         }
+
+        
         const storeIDs = posts.map((post) => post.storeID)
         const posters = posts.map((post) => post.userID)
         const users = await User.find({
