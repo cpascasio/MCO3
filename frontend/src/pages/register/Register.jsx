@@ -3,12 +3,17 @@ import { useNavigate } from "react-router-dom";
 import "./register.css";
 import useRegister from "../../../hooks/useRegister.js";
 import { toast } from "react-toastify";
+import { useEffect } from "react";
+import { useUserContext } from "../../../hooks/useUserContext.js";
 
 const Register = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [cpassword, setCPassword] = useState("");
     const {register} = useRegister();
+    const router = useNavigate();
+    const { user } = useUserContext();
+
 
     const navigate = useNavigate();
 
@@ -21,6 +26,9 @@ const Register = () => {
 
         const user = await register(username, password);
     };
+
+    useEffect(() => {user ? router(`/`) : ''}, [user])
+
 
     return (
         <div

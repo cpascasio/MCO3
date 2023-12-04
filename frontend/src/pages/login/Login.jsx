@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useUser } from "../../../src/context/UserContext.jsx";
 import "./login.css";
@@ -11,7 +11,7 @@ const Login = () => {
     const navigate = useNavigate();
     const { user, dispatch } = useUser(); // Access user context
     const { login } = useLogin()
-
+    const router = useNavigate()
     /*
     const handleLogin = () => {
         // Add your authentication logic here
@@ -31,6 +31,8 @@ const Login = () => {
         console.log(username)
         console.log(password)
     }
+
+    useEffect(() => {user ? router(`/`) : ''}, [user])
     
     return (
         <div className="login-container" style={{ backgroundImage: 'url("https://res.cloudinary.com/dpzerkzhi/image/upload/v1701667833/assets/7cf4cd2c83059dae9a9120663e3fe328.svg")', opacity: 0.9}}>
