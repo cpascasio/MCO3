@@ -50,8 +50,6 @@ const searchPosts = async (req, res) => {
             .map((keyword) => `(?=.*\\b${keyword}\\b)`)
             .join("")
 
-    
-
         const posts = await Post.find({
             $or: [
                 {

@@ -72,10 +72,10 @@ const ReviewBox = (reviews) => {
     //     }
     //   };
 
-    const profileIcon = `../../../public/profile-pictures/${reviews.userID}.jpeg`;
+    // const profileIcon = `../../../public/profile-pictures/${reviews.userID}.jpeg`;
 
-    useEffect(() => {console.log(reviews.storeImage);
-    console.log("REVIEW-BOX")},[reviews]);
+    // useEffect(() => {console.log(reviews.storeImage);
+    // console.log("REVIEW-BOX")},[reviews]);
 
     if (reviews.selectedFilter !== '0' && reviews.rating !== parseInt(reviews.selectedFilter)) {
         return null;

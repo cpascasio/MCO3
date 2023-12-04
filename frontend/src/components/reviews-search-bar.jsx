@@ -1,4 +1,4 @@
-const ReviewSearchBar = ({ handleSearch, handleSearchChange }) => {
+const ReviewSearchBar = ({ searchQuery, handleSearch, handleSearchChange }) => {
     return (
         <>
             {/* input type="text" placeholder="Search here" className="input input-bordered w-full max-w-xs" style={{marginLeft: '7rem', backgroundColor: '#f4f0ec'}} */}
@@ -6,8 +6,11 @@ const ReviewSearchBar = ({ handleSearch, handleSearchChange }) => {
                 <div className="input-group" style={{ marginTop: "1.5rem" }}>
                     <input
                         type="text"
-                        onChange={handleSearchChange}
-                        placeholder="Search…"
+                        value={searchQuery}  // Pass the correct state here
+                        onChange={(e) => {
+                            handleSearchChange(e);
+                            handleSearch(e.target.value);
+                        }}
                         className="input w-[20rem] input-bordered"
                         style={{
                             marginLeft: "7rem",
@@ -21,7 +24,10 @@ const ReviewSearchBar = ({ handleSearch, handleSearchChange }) => {
                             borderColor: "#885133",
                             backgroundColor: "#885133",
                         }}
-                        onClick={handleSearch}
+                        onClick={(e) => {
+                            e.preventDefault();
+                            handleSearch(searchQuery);
+                        }}
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"

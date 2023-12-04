@@ -28,26 +28,30 @@ const Reviews = () => {
         setRefetch(!refetch);
     };
 
+    // const handleSearchChange = (e) => {
+    //     setSearch(e.target.value);
+    // };
+
     const handleSearchChange = (e) => {
-        setSearch(e.target.value);
+        setSearchQuery(e.target.value);
     };
+    
 
     const handleSearch = (query) => {
         setSearchQuery(query);
     };
 
-    // useEffect(() => {
-    //     if (review) console.log(review[0].reviewImages);
-    // }, [review]);
-
     useEffect(() => {
+        console.log('Search Query:', searchQuery);
+    
         if (review) {
             console.log('Review data:', review);
         }
         if (error) {
             console.error('Error fetching reviews:', error);
         }
-    }, [review, error]);
+    }, [review, error, searchQuery]);
+    
 
     return (
         <div className="w-full h-full flex flex-col justify-center" style={{ backgroundColor: '#f0e6d7' }}>
@@ -55,7 +59,7 @@ const Reviews = () => {
                 <div className="page-title-review">Reviews</div>
             </div>
             <div className="flex justify-between items-center z-10">
-                <SearchBar handleSearch={handleSearch} handleSearchChange={handleSearchChange}/>
+                <SearchBar searchQuery={searchQuery} handleSearch={handleSearch} handleSearchChange={handleSearchChange}/>
                 <RatingFilter selectedFilter={selectedFilter} onFilterChange={handleFilterChange} />
             </div>
             <div className="reviews-container flex flex-wrap justify-center items-center" style={{ backgroundColor: '#f0e6d7', marginBottom: '5rem' }}>
