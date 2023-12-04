@@ -202,7 +202,7 @@ const ReviewModalOwner = ({ setComments, reviewID  }) => {
             }}
           >
             <img
-              src="../../../public/assets/add-media.svg"
+              src="https://res.cloudinary.com/dpzerkzhi/image/upload/v1701689276/assets/300a05fc7791bad7e118f3d7121ab626.svg"
               style={{ width: "1rem" }}
               alt="Add Media"
             />

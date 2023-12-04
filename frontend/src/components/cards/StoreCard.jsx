@@ -23,7 +23,7 @@ const StoreCard = ({ store }) => {
             starElements.push(
                 <img
                     alt="Star"
-                    src="../../../public/assets/yellow-star.svg"
+                    src="https://res.cloudinary.com/dpzerkzhi/image/upload/v1701688573/assets/11eee29d41b299c842010ceef873b6c7.svg"
                     className="w-4"
 
                 />
@@ -33,7 +33,7 @@ const StoreCard = ({ store }) => {
             starElements.push(
                 <img
                     alt="Star"
-                    src="../../../public/assets/gray-star.svg"
+                    src="https://res.cloudinary.com/dpzerkzhi/image/upload/v1701688673/assets/efd52e5c7c3499f414b909fc3a42a2a7.svg"
                     className="w-4"
                 />
             );

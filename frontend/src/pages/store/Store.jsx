@@ -130,7 +130,6 @@ const Store = () => {
             style={{ backgroundColor: "#f0e6d7" }}
         >
             {" "}
-            {/* DONT CHANGE THIS */}
             <div className="flex w-full h-full  flex-col">
                 <div className="mx-60 flex w-full flex-start p-4 items-center justify-start">
                     <h1 className="font-bold text-[#9c1a1d] text-xl">

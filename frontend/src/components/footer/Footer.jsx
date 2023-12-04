@@ -4,7 +4,7 @@ const Footer = () => {
         <div>
             <footer className="footer footer-center p-10 bg-primary text-primary-content" style={{
                     backgroundColor: "white",
-                    backgroundImage: 'url("/footer.svg")', // Replace with your image path
+                    backgroundImage: 'url("https://res.cloudinary.com/dpzerkzhi/image/upload/v1701667510/assets/143d9216a5689382df7a025fa32055f9.svg")', // Replace with your image path
                     backgroundSize: 'cover', // You can adjust this property
                     backgroundRepeat: 'no-repeat',
                     padding: "20px" }}>

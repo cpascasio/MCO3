@@ -122,7 +122,7 @@ const Card = ({ url, category, title, description }) => {
 const items = [
   {
     id: 1,
-    url: "/kanto.jpeg",
+    url: "https://res.cloudinary.com/dpzerkzhi/image/upload/v1701667014/assets/4c7f7f718e4effa62a4eff89632c273c.jpg",
     category: "",
     title: "Kanto Freestyle",
     description:
@@ -130,7 +130,7 @@ const items = [
   },
   {
     id: 2,
-    url: "/olafrango.jpeg",
+    url: "https://res.cloudinary.com/dpzerkzhi/image/upload/v1701666823/assets/26798746d248b5f37d9dbacaa339fc78.jpg",
     category: "",
     title: "Ola Frango",
     description:
@@ -138,7 +138,7 @@ const items = [
   },
   {
     id: 3,
-    url: "/el-poco.jpeg",
+    url: "https://res.cloudinary.com/dpzerkzhi/image/upload/v1701666828/assets/77f2fb5fa41242558d547ec4f6a924f0.jpg",
     category: "",
     title: "El Poco",
     description:
@@ -146,7 +146,7 @@ const items = [
   },
   {
     id: 4,
-    url: "/24chicken.jpeg",
+    url: "https://res.cloudinary.com/dpzerkzhi/image/upload/v1701666839/assets/e8c9efbd536c69cd5ed9fd7f7e5f0b53.jpg",
     category: "",
     title: "24 Chicken",
     description:
@@ -154,7 +154,7 @@ const items = [
   },
   {
     id: 5,
-    url: "/almakkah.jpeg",
+    url: "https://res.cloudinary.com/dpzerkzhi/image/upload/v1701667013/assets/f5737f5414bdfa4ff87b0b6e0d6b934a.jpg",
     category: "",
     title: "Al Makkah",
     description:

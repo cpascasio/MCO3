@@ -13,9 +13,9 @@ import Profile from "../pages/profile/profile.jsx";
 const routes = [
     {/* CTRL + CLICK the elements to go to the file */},
     { path: "/", element: <Homepage />, name: "Homepage" },
-    { path: "/store", element: <Store />, name: "Store" },
+    { path: "/store", element: <Store />, name: "Store"  },
 
-    { path: "/login", element: <Login/>, name: "Login" },
+    { path: "/login", element: <Login/>, name: "Login" , protected: true },
     { path: "/register", element: <Register />, name: "Register" },
     { path: "/store/:id", element: <StorePage />, name: "Store" },
     { path: "/reviews", element: <Reviews />, name: "Reviews" },

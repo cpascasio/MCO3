@@ -3,12 +3,17 @@ import { useNavigate } from "react-router-dom";
 import "./register.css";
 import useRegister from "../../../hooks/useRegister.js";
 import { toast } from "react-toastify";
+import { useEffect } from "react";
+import { useUserContext } from "../../../hooks/useUserContext.js";
 
 const Register = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [cpassword, setCPassword] = useState("");
     const {register} = useRegister();
+    const router = useNavigate();
+    const { user } = useUserContext();
+
 
     const navigate = useNavigate();
 
@@ -22,10 +27,13 @@ const Register = () => {
         const user = await register(username, password);
     };
 
+    useEffect(() => {user ? router(`/`) : ''}, [user])
+
+
     return (
         <div
             className="register-container"
-            style={{ backgroundImage: 'url("/bghehe.svg")', opacity: 0.9 }}
+            style={{ backgroundImage: 'url("https://res.cloudinary.com/dpzerkzhi/image/upload/v1701667833/assets/7cf4cd2c83059dae9a9120663e3fe328.svg")', opacity: 0.9 }}
         >
             <div className="w-full h-screen flex justify-center items-center">
                 <div
@@ -40,7 +48,7 @@ const Register = () => {
                     }}
                 >
                     <img
-                        src="/loginimage.svg"
+                        src="https://res.cloudinary.com/dpzerkzhi/image/upload/v1701667322/assets/77fd39bc94612d7e67253a42297db766.svg"
                         style={{
                             width: "30%",
                             height: "100%",
