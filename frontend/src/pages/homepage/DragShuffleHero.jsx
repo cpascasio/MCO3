@@ -81,7 +81,7 @@ const DragShuffleHero = () => {
                     className="relative h-[450px] w-[350px]"
                 >
                     <Card
-                        imgUrl="/olafrango.jpeg"
+                        imgUrl="https://res.cloudinary.com/dpzerkzhi/image/upload/v1701666823/assets/26798746d248b5f37d9dbacaa339fc78.jpg"
                         testimonial="This is the best!"
                         author="Ola Frango"
                         handleDragEnd={handleDragEnd}
@@ -91,7 +91,7 @@ const DragShuffleHero = () => {
                         setDragging={setDragging}
                     />
                     <Card
-                        imgUrl="/24chicken.jpeg"
+                        imgUrl="https://res.cloudinary.com/dpzerkzhi/image/upload/v1701666839/assets/e8c9efbd536c69cd5ed9fd7f7e5f0b53.jpg"
                         testimonial="The best chicken!"
                         author="24 Chicken"
                         handleDragEnd={handleDragEnd}
@@ -101,7 +101,7 @@ const DragShuffleHero = () => {
                         setDragging={setDragging}
                     />
                     <Card
-                        imgUrl="/el-poco.jpeg"
+                        imgUrl="https://res.cloudinary.com/dpzerkzhi/image/upload/v1701666828/assets/77f2fb5fa41242558d547ec4f6a924f0.jpg"
                         testimonial="Best tacos!"
                         author="El Poco"
                         handleDragEnd={handleDragEnd}
