@@ -7,7 +7,7 @@ import StorePage from "../pages/storepage/StorePage";
 import Reviews from "../pages/reviews/Reviews";
 import People from "../pages/people/People";
 import Profile from "../pages/profile/profile.jsx";
-
+import About from "../pages/about/about.jsx";
 
 
 const routes = [
@@ -21,7 +21,7 @@ const routes = [
     { path: "/reviews", element: <Reviews />, name: "Reviews" },
     { path: "/people", element: <People />, name: "People" },
     { path: "/profile/:username", element: <Profile />, name: "Profile" },
-    
+    { path: "/about", element: <About />, name: "About" },
 ];
 
 export default routes;

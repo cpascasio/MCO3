@@ -9,6 +9,7 @@ const fileUpload = require("express-fileupload")
 const postRouter = require("./routes/posts")
 const commentRouter = require("./routes/comments")
 
+
 // express app
 const app = express()
 
@@ -27,6 +28,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/stores", storeRoutes);
 app.use("/api/posts", postRouter)
 app.use("/api/comments", commentRouter)
+
 
 
 // connect to db
