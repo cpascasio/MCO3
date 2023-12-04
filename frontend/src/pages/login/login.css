@@ -84,8 +84,6 @@
     line-height: normal;
 }
 
-
-
 #signup {
     color: #9C1A1D;
     font-size: 11px;
@@ -112,17 +110,14 @@
     padding: 40px;
 }
 
-/* Existing styles ... */
-
 .rememberme-container {
     display: flex;
-    align-items: center; /* Center items vertically */
-    padding: 20px 0; /* Adjust padding as needed */
+    align-items: center; 
+    padding: 20px 0;
 }
 
-/* "Remember Me" Checkbox */
 #rememberMeCheckbox {
-    margin-right: 10px; /* Adjust spacing between checkbox and label */
+    margin-right: 10px; 
     background-color: #FFF6EA;
 }
 
@@ -130,10 +125,9 @@
     cursor: pointer;
 }
 
-/* "Remember Me" label */
 .rememberMe {
     color: #9C1A1D;
-    font-size: 12px; /* Adjust font size as needed */
+    font-size: 12px; 
     font-family: Inter, sans-serif;
     font-weight: 600;
     word-wrap: break-word;

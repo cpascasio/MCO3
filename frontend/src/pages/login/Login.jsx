@@ -12,6 +12,7 @@ const Login = () => {
     const { user, dispatch } = useUser(); // Access user context
     const { login } = useLogin()
     const router = useNavigate()
+    const [rememberMe, setRememberMe] = useState(false);
     /*
     const handleLogin = () => {
         // Add your authentication logic here
@@ -32,13 +33,10 @@ const Login = () => {
         console.log(password)
     }
 
-     // State to track the "Remember Me" checkbox
-  const [rememberMe, setRememberMe] = useState(false);
-
-  // Function to toggle the "Remember Me" state
-  const toggleRememberMe = () => {
-    setRememberMe(!rememberMe);
-  };
+    // Function to toggle the "Remember Me" state
+    const toggleRememberMe = () => {
+        setRememberMe(!rememberMe);
+    };
 
     useEffect(() => {user ? router(`/`) : ''}, [user])
     
@@ -69,7 +67,6 @@ const Login = () => {
                             style={{color: '#FFF6EA'}}
                         />
                         <div className="rememberme-container">
-                            {/* "Remember Me" Checkbox */}
                             <input
                                 type="checkbox"
                                 id="rememberMeCheckbox"
