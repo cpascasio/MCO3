@@ -6,6 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapPin } from '@fortawesome/free-solid-svg-icons';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
+
 
 const CARD_WIDTH = 400;
 const CARD_HEIGHT = 400;
@@ -89,7 +91,8 @@ const CardCarousel = ({stores, length}) => {
             className="flex"
           >
             {stores?.map((store) => {
-              return <Card key={store.id} {...store} />;
+              console.log('ID', store?._id)
+              return <Card key={store?._id} {...store} />;
             })}
           </motion.div>
         </div>
@@ -122,7 +125,7 @@ const CardCarousel = ({stores, length}) => {
   );
 };
 
-const Card = ({ image, storeName, description, rating }) => {
+const Card = ({ image, storeName, description, rating , _id}) => {
   const renderStars = () => {
     const stars = [];
     for (let i = 0; i < rating; i++) {
@@ -132,7 +135,7 @@ const Card = ({ image, storeName, description, rating }) => {
   };
 
   return (
-    <div
+    <Link to={`/store/${_id}`}
       className="relative shrink-0 cursor-pointer rounded-2xl bg-white shadow-md transition-all hover:scale-[1.015] hover:shadow-xl"
       style={{
         width: CARD_WIDTH,
@@ -150,7 +153,7 @@ const Card = ({ image, storeName, description, rating }) => {
         <p className="my-2 text-3xl font-bold">{storeName}</p>
         <p className="text-lg text-slate-300 text-justify">{description}</p>
       </div>
-    </div>
+    </Link>
   );
 };
 

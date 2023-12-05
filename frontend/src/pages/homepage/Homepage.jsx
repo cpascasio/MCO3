@@ -32,6 +32,8 @@ const Homepage = () => {
     console.log('HOMEPAGE STORE DATA: ', storeData);
   }, [storeData]);
 
+  console.log('STORE ID: ', storeData?._id)
+
   useEffect(() => {
     console.log('Number of fetched stores: ', storeData?.length || 0);
   }, [storeData]);

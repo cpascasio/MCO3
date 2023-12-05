@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "jsonwebtoken": "^9.0.2",
-    "react-modal": "^3.16.1"
+    "react-modal": "^3.16.1",
+    "react-router-dom": "^6.20.1"
   }
 }
