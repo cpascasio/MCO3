@@ -63,7 +63,7 @@ export const UserReviewBox = (reviews) => {
         </div>
       </div>
       <div className="overlap">
-        <div className="review-title2">{reviews.title}</div>
+        <div className="review-title2 overflow-hidden whitespace-nowrap overflow-ellipsis">{reviews.title}</div>
         <p className="review-body2">{reviews.comment}</p>
         </div>
             {Array.isArray(reviews.reviewImage) && reviews.reviewImage.length > 0 && (
