@@ -148,7 +148,7 @@ const Card = ({ image, storeName, description, rating }) => {
           {renderStars()} 
         </span>
         <p className="my-2 text-3xl font-bold">{storeName}</p>
-        <p className="text-lg text-slate-300">{description}</p>
+        <p className="text-lg text-slate-300 text-justify">{description}</p>
       </div>
     </div>
   );
