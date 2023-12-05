@@ -12,10 +12,17 @@ const EditReviewModal = ({ setStoreReviews, review }) => {
     const [title, setTitle] = useState(review.title);
     const [body, setBody] = useState(review.body);
     const [rating, setRating] = useState(review.rating);
+    const [reviewImage, setReviewImage] = useState(review.media);
     const [error, setError] = useState("");
     const [file, setFile] = useState(null);
     const [modified, setModified] = useState(false);
     const { user } = useUserContext();
+    const [newImage, setNewImage] = useState(null);
+    const fileRef = useRef(null);
+
+    const fileInputRef = useRef(null);
+
+
 
 
     const toastID = useRef(null);
@@ -31,12 +38,41 @@ const EditReviewModal = ({ setStoreReviews, review }) => {
 
     
 
+    // const handleImageChange = (event) => {
+    //     const fileUploaded = event.target.files[0];
+    //     setNewImage(fileUploaded);
+    //     setModified(true);
+        
+    // };
+
+    const handleImageChange = (event) => {
+        const fileUploaded = event.target.files[0];
+        setFile(fileUploaded);
+        setModified(true);
+    };
     
+
+    const handleDeleteCurrentMedia = () => {
+        setReviewImage(null); // Clear the current media state
+        setFile(null);
+        setModified(true);
+    };
+
+    // Function to handle deleting the selected media
+    const handleDeleteMedia = () => {
+        fileRef.current.value = null; // Clear the file input
+        setFile(null); // Clear the file state
+
+        handleDeleteCurrentMedia();
+        setModified(true);
+    };
 
     const handlePostReview = async (event) => {
 
         // Check if both title and review are provided
         event.preventDefault();
+         
+
 
         const config = {
             headers: {
@@ -48,6 +84,13 @@ const EditReviewModal = ({ setStoreReviews, review }) => {
         if(modified){
             console.log("MODIFIED")
             const form = new FormData();
+
+            // Check if a file is selected
+    const selectedFile = fileRef.current.files[0];
+    console.log("Selected File:", selectedFile);
+
+            
+            
 
     // Display loading notification
     toastID.current = toast.loading("Updating review now...");
@@ -66,8 +109,25 @@ const EditReviewModal = ({ setStoreReviews, review }) => {
         form.append("rating", rating);
     }
 
+    if(selectedFile){
+        handleImageChange();
+        form.append("img", selectedFile);
+    }
+
+   
+
+ 
+        
+    
+
+    
+
     console.log("FORM IN EDIT REVIEW MODAL");
     console.log(form);
+
+
+    
+    
 
     
     
@@ -116,6 +176,7 @@ const EditReviewModal = ({ setStoreReviews, review }) => {
         setTitle(review.title);
         setBody(review.body);
         setRating(review.rating);
+        setFile(review.newImage)
         setModified(false);
         document.getElementById(`my_modal_${review._id}+edit`).close();
 
@@ -124,9 +185,10 @@ const EditReviewModal = ({ setStoreReviews, review }) => {
             setError("Please make a change to the review before submitting.");
 
             setTitle(review.title);
-        setBody(review.body);
-        setRating(review.rating);
-        setModified(false);
+            setBody(review.body);
+            setRating(review.rating);
+            setFile(review.media)
+            setModified(false);
 
 
         }
@@ -145,24 +207,27 @@ const EditReviewModal = ({ setStoreReviews, review }) => {
         setTitle(review.title);
         setBody(review.body);
         setRating(review.rating);
+        setReviewImage(review.media)
         setModified(false);
         setError("");
         document.getElementById(`my_modal_${review._id}+edit`).close();
     };
 
+    console.log("REVIEW IMAGE: ", review.media)
     return (
         <>
             <button
-    className="btn bg-[#FFF6EA] m-2 border-2 border-[#885133] hover:bg-[#FFF6EA] hover:border-2 hover:border-[#885133]"
-    onClick={() => {
-        setRating(review.rating);
-        setTitle(review.title);
-        setBody(review.body);
-        setModified(false);
-        setError("");
-        document.getElementById(`my_modal_${review._id}+edit`).showModal();
-    }}
->
+                className="btn bg-[#FFF6EA] m-2 border-2 border-[#885133] hover:bg-[#FFF6EA] hover:border-2 hover:border-[#885133]"
+                onClick={() => {
+                    setRating(review.rating);
+                    setTitle(review.title);
+                    setBody(review.body);
+                    setReviewImage(review.media)
+                    setModified(false);
+                    setError("");
+                    document.getElementById(`my_modal_${review._id}+edit`).showModal();
+                }}
+            >
                 <img className="pr-2" src={Edit} alt="Location" />{" "}
                 <h1 className="text-[#885133]">Edit</h1>
             </button>
@@ -218,23 +283,90 @@ const EditReviewModal = ({ setStoreReviews, review }) => {
                     <div style={{ color: "red", marginBottom: "10px" }}>
                         {error}
                     </div>
-                    <button
-                        style={{
-                            width: "2rem",
-                            height: "2rem",
-                            backgroundColor: "white",
-                            borderRadius: "50%",
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                        }}
-                    >
+
+                {/* Display the current review image */}
+                    {reviewImage && (
+                    <div style={{ position: 'relative', marginBottom: '10px' }}>
                         <img
-                            src="https://res.cloudinary.com/dpzerkzhi/image/upload/v1701689276/assets/300a05fc7791bad7e118f3d7121ab626.svg"
-                            style={{ width: "1rem" }}
-                            alt="Add Media"
+                            src={reviewImage}
+                            alt="Current Media"
+                            style={{ width: '450px' }}
                         />
+                        <button
+                            className="btn btn-sm btn-circle btn-ghost"
+                            onClick={handleDeleteCurrentMedia}
+                            style={{
+                                position: 'absolute',
+                                top: '5px',
+                                right: '5px',
+                                backgroundColor: '#885133',
+                                color: 'white',
+                            }}
+                        >
+                        X
                     </button>
+                    </div>
+                    )}
+
+                    {/* Display selected media */}
+                    {file && (
+                        <div style={{ position: 'relative', marginBottom: '10px' }}>
+                        <img
+                            src={URL.createObjectURL(file)}
+                            alt="Selected Media"
+                            style={{ width: '450px' }}
+                        />
+
+                        <button
+                            className="btn btn-sm btn-circle btn-ghost"
+                            onClick={handleDeleteMedia}
+                            style={{
+                            position: 'absolute',
+                            top: '5px',
+                            right: '5px',
+                            backgroundColor: '#885133',
+                            color: 'white',
+                            }}
+                        >
+                            X
+                        </button>
+                        </div>
+                    )}
+
+                    {/* Display "Add Media" button only if reviewImage is deleted */}
+                    {!reviewImage && (
+                        <><div style={{ color: "red", marginBottom: "10px" }}>{error}</div><button
+                            style={{
+                                width: "2rem",
+                                height: "2rem",
+                                backgroundColor: "white",
+                                borderRadius: "50%",
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                            }}
+                        >
+                            {/* Added label for better accessibility */}
+                            <label htmlFor="mediaInput" style={{ cursor: "pointer" }}>
+                                <img
+                                    src="https://res.cloudinary.com/dpzerkzhi/image/upload/v1701689276/assets/300a05fc7791bad7e118f3d7121ab626.svg"
+                                    style={{ width: "1rem" }}
+                                    alt="Add Media" />
+                            </label>
+                            {/* Ref added to file input */}
+                            <input
+                                type="file"
+                                id="mediaInput"
+                                ref={fileRef}
+                                onChange={(event) => {
+                                    const selectedFile = event.target.files[0];
+                                    setFile(selectedFile);
+                                    console.log("ADDED FILE ACKNOWLEDGED");
+                                } }
+                                style={{ display: "none" }} />
+                        </button></>
+                    )}
+
                     <div className="modal-action rounded-r-full ">
                         <form method="dialog">
                             <button
