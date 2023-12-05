@@ -129,8 +129,8 @@ const ReviewBox = (reviews) => {
                 <div className="overlap-group">
                     <div className="review-title overflow-hidden whitespace-nowrap overflow-ellipsis">{reviews.title}</div>
                     {/* <div className="review-title overflow-hidden whitespace-nowrap overflow-ellipsis">hfiuwhfiuwjefjwgefywgefjhwgefygjwehfkhjufksedjfisugkfjnjslkhfkjsnklfr</div> */}
-                    {/* <p className="review-body ">{reviews.comment}</p> */}
-                    <p className="review-body">hellohellohellohellohellohellovvhellohellohellovvvhellohellohellovvhellohellovvvhellovhellohellovvvhellovvvvhellohellohellohellohellohellovvvhellohellohellovv</p>
+                    <p className="review-body ">{reviews.comment}</p>
+                    {/* <p className="review-body">hellohellohellohellohellohellovvhellohellohellovvvhellohellohellovvhellohellovvvhellovhellohellovvvhellovvvvhellohellohellohellohellohellovvvhellohellohellovv</p> */}
                 </div>
                 <div className="votes">
                     {/* <div className="text-wrapper">(1)</div> */}

@@ -26,7 +26,8 @@
             top: 365px;
         }
         .review-body {
-            height: 15rem; /* Set a fixed height */
+            -webkit-line-clamp: 16;
+            max-height: 16rem; /* Set a fixed height */
         }
 
       }
@@ -165,10 +166,21 @@
     top: 27px;
     left: 0;
     width: 350px;
-    height: 60px; /* Set a fixed height */
+    /* height: 60px; Set a fixed height */
     overflow-wrap: break-word;
     overflow: hidden;
     text-overflow: ellipsis;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 3; /* Adjust the number of lines before applying ellipsis */
+    /* Fallback for non-webkit browsers */
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    height: fit-content;
+    max-height: 4rem; /* Adjust the height equivalent to the number of lines */
+    /* line-height: 1.5em; Adjust line height accordingly */
 }
 
 .review-box .votes{
