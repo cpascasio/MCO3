@@ -180,7 +180,9 @@ const Reviews = () => {
                         />
                     ))}
                     {review?.length === 0 && (
-                        <div className="text-black">No reviews found.</div>
+                        <div className="text-black center-text" style={{ width: '100vw', height: '40vh', display: 'flex', justifyContent: 'center', alignItems: 'center', textAlign: 'center'}}>
+                            No reviews found.
+                        </div>
                     )}
             </div>
             <div className="w-full flex justify-center items-center" style={{marginBottom: '1rem'}}>

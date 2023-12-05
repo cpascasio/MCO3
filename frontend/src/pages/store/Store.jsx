@@ -212,7 +212,7 @@ const Store = () => {
 
                 <div className="flex flex-start flex-row flex-wrap w-full h-fit p-5 items-center justify-center ">
                     <div className="flex items-center justify-center p-5 border bg-[#9c1a1d] rounded-lg">
-                        <div className="grid grid-cols-5 gap-5 p-5 rounded-lg border-4 border-[#F06E71] bg-[#9c1a1d]  ">
+                        <div className="grid grid-cols-5 gap-5 p-5 rounded-lg border-4 border-[#F06E71] bg-[#9c1a1d]  " >
                             {stores
                                 ?.slice(indexOfFirstItem, indexOfLastItem)
                                 .map((store, index) => (
@@ -224,7 +224,10 @@ const Store = () => {
                                     />
                                 ))}
                             {stores?.length === 0 && (
-                                <div className="text-white">No stores found.</div>
+                                <div className="text-white center-text" style={{ width: '100vw', height: '40vh', display: 'flex', justifyContent: 'center', alignItems: 'center', textAlign: 'center'}}>
+                                    No stores found.
+                              </div>
+                              
                             )}
                         </div>
                     </div>
