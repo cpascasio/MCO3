@@ -183,7 +183,7 @@ const Card = ({
                 style={{ borderColor: "#9c1a1d" }}
             />
             <span
-                className="text-center text-lg italic text-slate-400 font-bold"
+                className="text-center text-lg italic text-slate-400 font-bold overflow-hidden whitespace-nowrap overflow-ellipsis"
                 style={{ color: "#b78465", fontSize: "24px" }}
             >
                 "{testimonial}"

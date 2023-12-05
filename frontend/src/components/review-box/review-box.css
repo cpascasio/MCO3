@@ -25,6 +25,9 @@
         .votes{
             top: 365px;
         }
+        .review-body {
+            height: 15rem; /* Set a fixed height */
+        }
 
       }
 }
@@ -162,11 +165,10 @@
     top: 27px;
     left: 0;
     width: 350px;
-    height: 80px; /* Set a fixed height */
-    /* overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: pre-line; To preserve newlines in the text */
+    height: 60px; /* Set a fixed height */
     overflow-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .review-box .votes{

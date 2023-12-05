@@ -24,6 +24,11 @@ const Reviews = () => {
         )}&keywords=${searchParams.get("keywords")}`
     );
 
+    // const { data: review } = useFetch(
+    //     `/api/posts/get_modified_posts?page=${searchParams.get("page")}&keywords=${searchParams.get("keywords")}&sort=desc`
+    //   );
+      
+
     useEffect(() => {
         if (review) console.log(review);
     }, [review]);
@@ -99,9 +104,7 @@ const Reviews = () => {
         setCurrentPage((old) => old + 1);
         setSearchParams({ page: `${currentPage + 1}`, keywords: `${searchParams.get("keywords")}` });
     };
-
     
-
     return (
         <div
             className="w-full h-full flex flex-col justify-center"
@@ -126,7 +129,10 @@ const Reviews = () => {
                 style={{ backgroundColor: "#f0e6d7", marginBottom: "5rem" }}
             >
                 {review &&
-                    review?.map((reviewData, index) => (
+                    review
+                    // .slice() // Create a copy of the array to avoid mutating the original
+                    // .sort((a, b) => new Date(b.date) - new Date(a.date)) // Sort by date in descending order
+                    .map((reviewData, index) => (
                         <ReviewBox
                             key={index}
                             username={reviewData.username}
