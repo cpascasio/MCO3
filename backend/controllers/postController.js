@@ -115,7 +115,7 @@ const searchPosts = async (req, res) => {
 
 const modifiedGetPosts = async (req, res) => {
     try {
-        const { keywords } = req.query
+        const { keywords, ratingFilter } = req.query; // Add ratingFilter extraction
         const page = req.query.page || 0
         const postPerPage = 9
         let posts
@@ -130,20 +130,35 @@ const modifiedGetPosts = async (req, res) => {
 
     console.log(pattern.map((pattern) => pattern.toString()));
 
-    posts = await Post.find({
-        $or: [
-            {
-                title: {
-                    $regex: new RegExp(pattern.map(p => `(${p.source})`).join('|'), 'i'),
+    console.log("RATING FILTER: ", ratingFilter);
+
+    // Adjust the rating filter logic
+    const ratingFilterQuery = ratingFilter !== undefined && ratingFilter !== null && ratingFilter !== "0" && !isNaN(ratingFilter)
+    ? { rating: parseInt(ratingFilter) }
+    : {};
+
+
+    console.log(" FILTER QUERY: ", ratingFilterQuery);
+
+        posts = await Post.find({
+            $and: [
+                {
+                    $or: [
+                        {
+                            title: {
+                                $regex: new RegExp(pattern.map(p => `(${p.source})`).join('|'), 'i'),
+                            },
+                        },
+                        {
+                            body: {
+                                $regex: new RegExp(pattern.map(p => `(${p.source})`).join('|'), 'i'),
+                            },
+                        },
+                    ],
                 },
-            },
-            {
-                body: {
-                    $regex: new RegExp(pattern.map(p => `(${p.source})`).join('|'), 'i'),
-                },
-            },
-        ],
-    })
+                ratingFilterQuery, // Apply the rating filter
+            ],
+        })
     .sort({ title: -1 })
                 .skip(page * postPerPage)
                 .limit(postPerPage)

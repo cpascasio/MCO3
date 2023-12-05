@@ -21,21 +21,18 @@ const Reviews = () => {
     });
     const [currentPage, setCurrentPage] = useState(0);
     const [search, setSearch] = useState("");
-    const { data: review } = useFetch(
-        `/api/posts/get_modified_posts?page=${searchParams.get(
-            "page"
-        )}&keywords=${searchParams.get("keywords")}`
-    );
-
     // const { data: review } = useFetch(
-    //     `/api/posts/get_modified_posts?page=${searchParams.get("page")}&keywords=${searchParams.get("keywords")}&sort=desc`
-    //   );
-      
-
+    //     `/api/posts/get_modified_posts?page=${searchParams.get(
+    //         "page"
+    //     )}&keywords=${searchParams.get("keywords")}`
+    // );
+    const { data: review } = useFetch(
+        `/api/posts/get_modified_posts?page=${searchParams.get("page")}&keywords=${searchParams.get("keywords")}&ratingFilter=${searchParams.get("ratingFilter")}`
+    );
+    
     useEffect(() => {
         if (review) console.log(review);
     }, [review]);
-
 
 
     const { data: amtPages } = useFetch("/api/posts/get_amount_pages");
@@ -43,9 +40,24 @@ const Reviews = () => {
         setSearchParams({ page: currentPage, keywords: search });
     }, [currentPage]);
 
+    // const handleFilterChange = (filterValue) => {
+    //     setSelectedFilter(filterValue);
+    // };
+
     const handleFilterChange = (filterValue) => {
-        setSelectedFilter(filterValue);
+        // Remove the local state management for selectedFilter
+        // setSelectedFilter(filterValue);
+    
+        // Instead, modify the searchParams directly
+        searchParams.set("ratingFilter", filterValue);
+        setSearchParams(searchParams);
+
+        console.log(filterValue);
+    
+        // Trigger a refetch by modifying the refetch state
+        setRefetch(!refetch);
     };
+    
 
     const handleHelpfulClick = () => {
         // Modify the refetch state here
