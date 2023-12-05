@@ -7,11 +7,14 @@ import "./reviews.css";
 import ReviewBox from "../../components/review-box/ReviewBox";
 import ReviewModal from "../../components/review-modal/review-modal";
 import SearchBar from "../../components/reviews-search-bar";
+import FullReview from "../../components/modal/full-review-modal";
 import "./reviews.css";
 
 const Reviews = () => {
     const [selectedFilter, setSelectedFilter] = useState("0");
     const [refetch, setRefetch] = useState(false); // Define refetch state
+    const [selectedReview, setSelectedReview] = useState(null);
+    const [isFullReviewModalOpen, setIsFullReviewModalOpen] = useState(false);
     const [searchParams, setSearchParams] = useSearchParams({
         page: "0",
         keywords: "",
@@ -104,6 +107,13 @@ const Reviews = () => {
         setCurrentPage((old) => old + 1);
         setSearchParams({ page: `${currentPage + 1}`, keywords: `${searchParams.get("keywords")}` });
     };
+
+    const handleReviewClick = (selectedReview) => {
+        console.log("Review clicked:", selectedReview);
+        setSelectedReview(selectedReview);
+        setIsFullReviewModalOpen(true);
+      };
+      
     
     return (
         <div
@@ -135,6 +145,10 @@ const Reviews = () => {
                     .map((reviewData, index) => (
                         <ReviewBox
                             key={index}
+                            onClick={() => {
+                                handleReviewClick(reviewData);
+                                document.getElementById('my_modal_3').showModal();
+                            }}                            
                             username={reviewData.username}
                             name={reviewData.name}
                             rating={reviewData.rating}
@@ -174,6 +188,34 @@ const Reviews = () => {
                     </button>
                 </div>
             </div>
+
+            {/* <dialog id="my_modal_3" className="modal">
+                <div className="modal-box" style={{ backgroundColor: '#f4f0ec', color: '#885133' }}>
+                    <form method="dialog"> */}
+                    {/* if there is a button in form, it will close the modal */}
+                    {/* <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                    </form>
+                    <h3 className="font-bold text-lg">SHOW FULL REVIEW HERE!</h3>
+                    <p className="py-4">Press ESC key or click on ✕ button to close</p>
+
+
+                </div>
+            </dialog> */}
+             {/* Render the FullReview modal */}
+            {/* {isFullReviewModalOpen && (
+                <FullReview
+                review={selectedReview}
+                onClose={() => setIsFullReviewModalOpen(false)}
+                />
+            )} */}
+
+        <dialog id="my_modal_3" className="modal">
+            <FullReview review={selectedReview} onClose={() => setIsFullReviewModalOpen(false)} />
+        </dialog>
+        {/* {isFullReviewModalOpen && (
+            <FullReview review={selectedReview} onClose={() => setIsFullReviewModalOpen(false)} />
+        )} */}
+            
         </div>
     );
 };

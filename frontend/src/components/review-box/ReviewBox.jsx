@@ -93,7 +93,7 @@ const ReviewBox = (reviews) => {
 
     return (
         <>
-             <div className={`review-box shadow-xl ${reviews.reviewImage?.length > 0 ? '' : 'no-image'}`}>
+             <div className={`review-box shadow-xl ${reviews.reviewImage?.length > 0 ? '' : 'no-image'}`} onClick={reviews.onClick} style={{ cursor: 'pointer' }}>
                 <div className="top-container">
                     <Link to={`/profile/${reviews.name}`}>
                     <img className="profile-icon" alt="Profile icon" src={reviews.image} />
