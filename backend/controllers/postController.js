@@ -183,6 +183,7 @@ const modifiedGetPosts = async (req, res) => {
             const upvotes = post.helpful
             const downvotes = post.notHelpful
             const storeID = post.storeID
+            const date = post.date
             return {
                 ...post._doc,
                 name,
@@ -191,7 +192,8 @@ const modifiedGetPosts = async (req, res) => {
                 storeName,
                 reviewImages,
                 downvotes,
-                upvotes
+                upvotes,
+                date
             }
         })
         return res.status(200).json(newPosts)

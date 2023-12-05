@@ -28,7 +28,13 @@ function generateStars(rating) {
     return starElements;
 }
 
+function formatDate(dateString) {
+    const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+    const formattedDate = new Date(dateString).toLocaleDateString('en-US', options);
 
+    // Replace slashes with dashes
+  return formattedDate.replace(/\//g, '-');
+  }
   
 const ReviewBox = (reviews) => {
     const yellowStars = generateStars(reviews.rating);
@@ -81,13 +87,22 @@ const ReviewBox = (reviews) => {
         return null;
     }
 
+   
+
+      const formattedDate = formatDate(reviews.date);
+
     return (
         <>
              <div className={`review-box shadow-xl ${reviews.reviewImage?.length > 0 ? '' : 'no-image'}`}>
-                <img className="profile-icon" alt="Profile icon" src={reviews.image} />
-                <Link to={`/profile/${reviews.name}`}>
-                    <div className="text-wrapper">{reviews.name}</div>
-                </Link>
+                <div className="top-container">
+                    <Link to={`/profile/${reviews.name}`}>
+                    <img className="profile-icon" alt="Profile icon" src={reviews.image} />
+                
+                        <div className="text-wrapper">{reviews.name}</div>
+                    </Link>
+                    <div className="date-container">{formattedDate}</div>
+                </div>
+                
                 {/* {reviews.image && <img className="review-image" alt="Review image" src={reviews.reviewImage} />} */}
                 {/* Conditionally render the image if the 'image' prop is provided. */}
                 {/* <Slideshow></Slideshow> */}
@@ -104,9 +119,10 @@ const ReviewBox = (reviews) => {
                 
 
                 {/* <Slideshow></Slideshow> */}
-
+                
                 <img className="restaurant-image" alt="Restaurant image" src={reviews.storeImage} />
                 <div className="restaurant-name">{reviews.storeName}</div>
+                
                 <div className="stars-wrapper flex flex-wrap">
                     {yellowStars}
                 </div>

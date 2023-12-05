@@ -144,6 +144,7 @@ const Reviews = () => {
                             downvote={reviewData.downvotes}
                             onHelpfulClick={handleHelpfulClick}
                             onNotHelpfulClick={handleNotHelpfulClick}
+                            date={reviewData.date}
                  
                         />
                     ))}
