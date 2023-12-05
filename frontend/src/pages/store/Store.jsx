@@ -220,8 +220,12 @@ const Store = () => {
                                         key={store._id}
                                         store={store}
                                         index={index}
+                                        reviews={filterReviews(store._id)} // Pass reviews to StoreCard
                                     />
                                 ))}
+                            {stores?.length === 0 && (
+                                <div className="text-white">No stores found.</div>
+                            )}
                         </div>
                     </div>
                 </div>

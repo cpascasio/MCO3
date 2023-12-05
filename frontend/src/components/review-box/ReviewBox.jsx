@@ -37,6 +37,8 @@ function formatDate(dateString) {
   }
   
 const ReviewBox = (reviews) => {
+
+    
     const yellowStars = generateStars(reviews.rating);
 
     // const [helpfulClicked, setHelpfulClicked] = useState(false);
@@ -78,7 +80,6 @@ const ReviewBox = (reviews) => {
     //     }
     //   };
 
-    const profileIcon = `../../../public/profile-pictures/${reviews.userID}.jpeg`;
 
     useEffect(() => {console.log(reviews.storeImage);
     console.log("REVIEW-BOX")},[reviews]);

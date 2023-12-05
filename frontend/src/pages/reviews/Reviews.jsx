@@ -138,10 +138,9 @@ const Reviews = () => {
                 className="reviews-container flex flex-wrap justify-center items-center"
                 style={{ backgroundColor: "#f0e6d7", marginBottom: "5rem" }}
             >
+
                 {review &&
                     review
-                    // .slice() // Create a copy of the array to avoid mutating the original
-                    // .sort((a, b) => new Date(b.date) - new Date(a.date)) // Sort by date in descending order
                     .map((reviewData, index) => (
                         <ReviewBox
                             key={index}
@@ -168,6 +167,9 @@ const Reviews = () => {
                  
                         />
                     ))}
+                    {review?.length === 0 && (
+                        <div className="text-black">No reviews found.</div>
+                    )}
             </div>
             <div className="w-full flex justify-center items-center" style={{marginBottom: '1rem'}}>
                 <div className="join">
