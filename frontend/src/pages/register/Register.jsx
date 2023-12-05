@@ -33,7 +33,7 @@ const Register = () => {
     return (
         <div
             className="register-container"
-            style={{ backgroundImage: 'url("https://res.cloudinary.com/dpzerkzhi/image/upload/v1701667833/assets/7cf4cd2c83059dae9a9120663e3fe328.svg")', opacity: 0.9 }}
+            style={{ backgroundColor: '#690000'}}
         >
             <div className="w-full h-screen flex justify-center items-center">
                 <div
@@ -53,7 +53,7 @@ const Register = () => {
                             width: "30%",
                             height: "100%",
                             objectFit: "cover",
-                            objectPosition: "-650px 0px",
+                            objectPosition: "-620px 0px",
                         }}
                     />
                     <div
@@ -83,7 +83,7 @@ const Register = () => {
 
                         <div className="username-container">
                             <input
-                                className="un"
+                                className="un placeholder-color"
                                 type="text"
                                 placeholder="Username"
                                 value={username}
@@ -92,7 +92,7 @@ const Register = () => {
                             />
                         </div>
                         <input
-                            className="pw"
+                            className="pw placeholder-color"
                             type="password"
                             placeholder="Password"
                             value={password}
@@ -100,7 +100,7 @@ const Register = () => {
                             style={{ color: "#FFF6EA" }}
                         />
                         <input
-                            className="pw"
+                            className="pw placeholder-color"
                             type="password"
                             placeholder="Confirm Password"
                             value={cpassword}
@@ -112,9 +112,11 @@ const Register = () => {
                                 <span id="alreadyhave">
                                     Already have an account?
                                 </span>{" "}
-                                <span id={"signin"}> Sign in Now! </span>
+                                <span id={"signin"}> Log in Now! </span>
                             </a>
                         </div>
+
+                        <br />
 
                         <button
                             // onClick={handleRegister}

@@ -45,6 +45,10 @@
     transform: translateY(-50%);
 }
 
+.un.placeholder-color::placeholder {
+    color: #690000;
+}
+
 .pw {
     width: 392px;
     height: 46px;
@@ -62,6 +66,10 @@
     background: #8D1214 url("/mdi_password.svg") no-repeat 10px center;
     padding-left: 40px; /* Adjust as needed */
 
+}
+
+.pw.placeholder-color::placeholder {
+    color: #690000;
 }
 
 .register-button {

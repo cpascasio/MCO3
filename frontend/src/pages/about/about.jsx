@@ -8,10 +8,10 @@ const About = () => {
       <header>
         {/* Logo */}
         <img
-            src="https://res.cloudinary.com/dpzerkzhi/image/upload/v1701702265/assets/0ebd9707c0721a8261b4554c2092c382.svg"
-            alt="Your Logo"
+            src="https://res.cloudinary.com/dpzerkzhi/image/upload/v1701739473/assets/3dba021f75fa9c493e701f28c810f1e4.png"
+            alt="Taft Buds Logo"
             style={{
-                width: '100px',
+                width: '350px',
                 height: 'auto',
                 display: 'inline-block',
                 margin: '0 auto',
@@ -28,6 +28,60 @@ const About = () => {
         </p>
       </section>
 
+      <br />
+      <br />
+
+      <header> <h1 style={{ color: '#f49294', fontSize: '40px', fontWeight: 'bold'}}> Founding Members </h1> </header>
+      <section className="about-members">
+          <div className="members-container">
+            {/* Member 1 - ARMADA */}
+            <div className="member">
+            <div className="zoom-wrapper"> <img
+                src="https://res.cloudinary.com/dpzerkzhi/image/upload/v1701705024/taftbbuds-members/60c7c27a40e0403ffa08defa64ff5c2c.jpg"
+                alt="ARMADA"
+                className="zoom-img"
+              /> </div>
+              <p style={{ color: '#FFF6EA', textAlign: 'center', fontWeight: 'bold', marginTop: '15px' }}>Minette Armada</p>
+            </div>
+
+            {/* Member 2 - LABABIDI */}
+            <div className="member">
+            <div className="zoom-wrapper"> <img
+                src="https://res.cloudinary.com/dpzerkzhi/image/upload/v1701739427/taftbbuds-members/67316e65579ab9a702bff54c45e6fcf3.jpg"
+                alt="LABABIDI"
+                className="zoom-img"
+              /> </div>
+              <p style={{ color: '#FFF6EA', textAlign: 'center', fontWeight: 'bold', marginTop: '15px' }}>Mez Lababidi</p>
+            </div>
+
+            {/* Member 3 - LUALHATI */}
+            <div className="member">
+            <div className="zoom-wrapper"><img
+                src="https://res.cloudinary.com/dpzerkzhi/image/upload/v1701705103/taftbbuds-members/f7e4ed6cded391ddccfea3262e782057.jpg"
+                alt="LUALHATI"
+                className="zoom-img"
+              /> </div>
+              <p style={{ color: '#FFF6EA', textAlign: 'center', fontWeight: 'bold', marginTop: '15px' }}>Shannyne Lualhati</p>
+            </div>
+
+            {/* Member 4- PASCASIO*/}
+            <div className="member">
+            <div className="zoom-wrapper"><img
+                src="https://res.cloudinary.com/dpzerkzhi/image/upload/v1700494703/APDEV-IMAGES/1700494699808.jpg"
+                alt="PASCASIO"
+                className="zoom-img"
+              /> </div>
+              <p style={{ color: '#FFF6EA', textAlign: 'center', fontWeight: 'bold', marginTop: '15px' }}>Ceejay Pascasio</p>
+            </div>
+          </div>
+        </section>
+
+      <br />
+      <br />
+
+      <hr />
+
+      <br />
       <br />
 
       {/* Third Party Libraries */}
@@ -292,6 +346,11 @@ const About = () => {
           </tbody>
         </table>
       </section>
+
+      <br />
+      <br />
+      <br />
+
     </div>
     </div>
   );
