@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
+import "./hero.css";
 
 const ScrollingTestimonials = ({ reviews }) => {
   return (
@@ -52,7 +53,10 @@ const TestimonialList = ({ list, reverse = false, duration = 500 }) => {
               <span className="block font-semibold text-2xl mb-1" style={{ padding: "10px 0px 0px 0px" }}>
                 {t.name}
               </span>
-                  <span className="block mb-3 text-lg font-semibold" style={{ color: "#f49294", padding: "0px 0px 10px 0px" }}>
+                  <span className="title block mb-3 text-lg font-semibold" 
+                      style={{ color: "#f49294", 
+                                padding: "0px 0px 10px 0px"
+                              }}>
                 {t.title}
               </span>
                   <span className="block text-lg text-slate-300 font-medium" style={{ color: "#FFF6EA" }}>

@@ -5,3 +5,19 @@
 input:focus {
     color: #b78465; /* Change this to your desired text color */
   }
+
+.title{
+    overflow-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 3; /* Adjust the number of lines before applying ellipsis */
+    /* Fallback for non-webkit browsers */
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    height: fit-content;
+    max-height: 5rem; 
+}
