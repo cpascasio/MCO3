@@ -106,6 +106,8 @@ const Store = () => {
         return similarity >= threshold;
     };
     const handleSearch = (e) => {
+        e.preventDefault();
+
         if (!e.target.value) {
             setStores(data);
             return;
@@ -145,9 +147,10 @@ const Store = () => {
                                 type="text"
                                 placeholder="What are you looking for?"
                                 className="input w-full rounded-r-none bg-white search-bar"
-                                onChange={handleSearch}
+                                onClick={handleSearch}
                             />
-                            <button className="btn rounded-l-none bg-[#9c1a1d] border-none text-[#FFF6EA]">
+                            <button className="btn rounded-l-none bg-[#9c1a1d] border-none text-[#FFF6EA]"
+                                >
                                 Search
                             </button>
                         </div>
