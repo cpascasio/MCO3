@@ -22,8 +22,7 @@ export default function ReviewModalV2({ setStoreReviews, storeID }) {
 
   useEffect(() => {
     console.log("FILEINPUT");
-    console.log(fileRef.current);
-    console.log(file)
+
 
     }, [fileRef]);
 
@@ -129,9 +128,10 @@ export default function ReviewModalV2({ setStoreReviews, storeID }) {
     setReview("");
     setRating(5);
     setFile(null);
-    fileRef.current.value = null;
-
-
+    
+    if(fileRef.current){
+      fileRef.current.value = null;
+  }
     document.getElementById("my_modal_1").close();
   };
 
@@ -143,7 +143,16 @@ export default function ReviewModalV2({ setStoreReviews, storeID }) {
 
       <button
         className="btn mt-5 flex w-[45%] bg-[#D62300] hover:bg-[#992710] text-white font-bold py-2 px-4 items-center justify-center border-none"
-        onClick={() => document.getElementById("my_modal_1").showModal()}
+        onClick={() => {
+          console.log("FILEINSIDE");
+          console.log(file);
+          fileRef.current.value = null;
+
+          setFile(null);
+          document.getElementById("my_modal_1").showModal()
+        
+      console.log("INSIDEWRITEMODAL");
+    }}
       >
         <img className="pr-2" src={addReview} alt="Location" />{" "}
         <h1 className="text-[#F9C8C8]">Add Review</h1>
