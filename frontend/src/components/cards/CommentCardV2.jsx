@@ -10,6 +10,7 @@ import { useRef } from "react";
 import { useUserContext } from "../../../hooks/useUserContext";
 import Trash from "../../../public/assets/mdi_trash.svg";
 import useFetch from "../../../hooks/useFetch";
+import { Link } from 'react-router-dom';
 
 const CommentCardV2 = ({  setComments, comment, userLoggedIn }) => {
     const [helpfulClicked, setHelpfulClicked] = useState(false);
@@ -223,18 +224,24 @@ const CommentCardV2 = ({  setComments, comment, userLoggedIn }) => {
                 style={{ borderWidth: "3px" }}
             >
                 <div className="avatar bg-transparent ">
+                    
                     {commentUser && (
-                        <div className="w-24 rounded-full bg-[#9C1A1D] overflow-hidden border-white border-2">
+                        <Link to={`/profile/${commentUser.username}`}>
+                            <div className="w-24 rounded-full bg-[#9C1A1D] overflow-hidden border-white border-2">
                             <img src={commentUser.image} />
                         </div>
+                        </Link>
                     )}
                 </div>
                 {commentUser && (
-                    <div className="flex flex-col w-full bg-[#9C1A1D] text-white">
-                        <p className="text-4xl font-bold">
-                            {commentUser.username}
-                        </p>
-                    </div>
+                     <Link to={`/profile/${commentUser.username}`}>
+                            <div className="flex flex-col w-full bg-[#9C1A1D] text-white">
+                            <p className="text-4xl font-bold">
+                                {commentUser.username}
+                            </p>
+                        </div>
+                     </Link>
+                    
                 )}
 
                 <div className="flex bg-[#9C1A1D] items-center justify-end w-full">
