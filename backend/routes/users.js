@@ -19,6 +19,8 @@ router.post("/register", createUser)
 router.post("/login", loginUser)
 
 
+
+
 router.use(requireAuth);
 
 // POST a single user

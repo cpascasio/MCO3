@@ -30,13 +30,14 @@ const getTokenExpirationDate = (token) => {
 
 }
 
+
 const refreshTokens = async (req, res) => {
 
   const refreshToken = req.body.refreshToken;
   try{
 
   const decoded = jwt.decode(refreshToken);
-  
+
   if (!decoded.exp) {
     return null;
   }
