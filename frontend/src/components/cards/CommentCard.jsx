@@ -263,9 +263,12 @@ const CommentCard = ({ setStoreReviews, review, ownerID, userLoggedIn }) => {
             <div className="h-fit flex w-full gap-5 items-center justify-start">
                 <div className="avatar bg-transparent">
                     {userOwner && (
-                        <div className="w-24 rounded-full overflow-hidden border-[#9C1A1D] border-2">
-                            <img src={userOwner.image} />
-                        </div>
+                        <Link to={`/profile/${userOwner.username}`}>
+                            <div className="w-24 rounded-full overflow-hidden border-[#9C1A1D] border-2">
+                                <img src={userOwner.image} />
+                            </div>
+                        </Link>
+                        
                     )}
                 </div>
                 {userOwner && (
