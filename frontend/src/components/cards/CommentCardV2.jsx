@@ -200,6 +200,22 @@ const CommentCardV2 = ({  setComments, comment, userLoggedIn }) => {
 
     };
 
+    function isEdited(){
+
+        if(comment.edited == true){
+            return 'Edited';
+        }
+
+    }
+
+    function formatDate(dateString) {
+        const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+        const formattedDate = new Date(dateString).toLocaleDateString('en-US', options);
+    
+        // Replace slashes with dashes
+      return formattedDate.replace(/\//g, '-');
+      }
+
     return (
         <div className="w-full h-fit bg-[#9C1A1D] mt-5 flex flex-col justify-center items-center p-5 rounded-lg">
             <div
@@ -276,7 +292,10 @@ const CommentCardV2 = ({  setComments, comment, userLoggedIn }) => {
                     )}
                     <img className="p-5" src={sphere} alt="Location" />{" "}
                     <span className="text-[#F06E71] font-bold text-lg">
-                        {comment.date}
+                        {formatDate(comment.date)}
+                    </span>
+                    <span className="text-[#f0eceb] font-bold text-lg ml-10" style={{ fontStyle: 'italic' }}>
+                        {isEdited(comment.edited)}
                     </span>
                 </div>
                 <div className="text-white text-2xl font-bold bg-[#9C1A1D] ">

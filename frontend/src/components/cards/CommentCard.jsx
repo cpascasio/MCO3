@@ -159,6 +159,14 @@ const CommentCard = ({ setStoreReviews, review, ownerID, userLoggedIn }) => {
 
     };
 
+    function formatDate(dateString) {
+        const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+        const formattedDate = new Date(dateString).toLocaleDateString('en-US', options);
+    
+        // Replace slashes with dashes
+      return formattedDate.replace(/\//g, '-');
+      }
+
 
     const handleDelete = async (event) => {
         // Check if both title and review are provided
@@ -239,6 +247,16 @@ const CommentCard = ({ setStoreReviews, review, ownerID, userLoggedIn }) => {
         return starElements;
     }
 
+    console.log(review.edited);
+
+    function isEdited(){
+
+        if(review.edited == true){
+            return 'Edited';
+        }
+
+    }
+
 
     return (
         <div className="w-full h-fit border-2 border-[#D62300] mt-5 flex flex-col justify-start p-5 rounded-lg">
@@ -259,6 +277,7 @@ const CommentCard = ({ setStoreReviews, review, ownerID, userLoggedIn }) => {
                         </div>
                     </Link>
                 )}
+
 
                 <div className="flex items-center justify-end w-full">
                     <div className="flex w-2/3 justify-end">
@@ -320,7 +339,10 @@ const CommentCard = ({ setStoreReviews, review, ownerID, userLoggedIn }) => {
                             </div>
                             <img className="p-5" src={sphere} alt="Location" />{" "}
                             <span className="text-[#F06E71] font-bold text-lg">
-                                {review.date}
+                                {formatDate(review.date)}
+                            </span>
+                            <span className="text-[#9C1A1D] font-bold text-lg ml-10" style={{ fontStyle: 'italic' }}>
+                                {isEdited(review.edited)}
                             </span>
                         </>
                     )}
