@@ -1,10 +1,10 @@
 const User = require("../models/userModels")
 const Post = require("../models/postModel")
 const Store = require("../models/storeModel")
-const Comment = require("../models/commentModel");
-const cloudinary = require("../utils/cloudinary");
-const fs = require("fs");
-const Schema = require("mongoose").Schema;
+const Comment = require("../models/commentModel")
+const cloudinary = require("../utils/cloudinary")
+const fs = require("fs")
+const Schema = require("mongoose").Schema
 
 const getPosts = async (req, res) => {
     try {
@@ -115,7 +115,7 @@ const searchPosts = async (req, res) => {
 
 const modifiedGetPosts = async (req, res) => {
     try {
-        const { keywords, ratingFilter } = req.query; // Add ratingFilter extraction
+        const { keywords, ratingFilter } = req.query // Add ratingFilter extraction
         const page = req.query.page || 0
         const postPerPage = 9
         let posts
@@ -126,40 +126,55 @@ const modifiedGetPosts = async (req, res) => {
             }
             const arrayKeywords = keywords.split(" ")
 
-            const pattern = arrayKeywords.map((keyword) => new RegExp(escapeRegExp(keyword), 'i'));
+            const pattern = arrayKeywords.map(
+                (keyword) => new RegExp(escapeRegExp(keyword), "i")
+            )
 
-    console.log(pattern.map((pattern) => pattern.toString()));
+            console.log(pattern.map((pattern) => pattern.toString()))
 
-    console.log("RATING FILTER: ", ratingFilter);
+            console.log("RATING FILTER: ", ratingFilter)
 
-    // Adjust the rating filter logic
-    const ratingFilterQuery = ratingFilter !== undefined && ratingFilter !== null && ratingFilter !== "0" && !isNaN(ratingFilter)
-    ? { rating: parseInt(ratingFilter) }
-    : {};
+            // Adjust the rating filter logic
+            const ratingFilterQuery =
+                ratingFilter !== undefined &&
+                ratingFilter !== null &&
+                ratingFilter !== "0" &&
+                !isNaN(ratingFilter)
+                    ? { rating: parseInt(ratingFilter) }
+                    : {}
 
+            console.log(" FILTER QUERY: ", ratingFilterQuery)
 
-    console.log(" FILTER QUERY: ", ratingFilterQuery);
-
-        posts = await Post.find({
-            $and: [
-                {
-                    $or: [
-                        {
-                            title: {
-                                $regex: new RegExp(pattern.map(p => `(${p.source})`).join('|'), 'i'),
+            posts = await Post.find({
+                $and: [
+                    {
+                        $or: [
+                            {
+                                title: {
+                                    $regex: new RegExp(
+                                        pattern
+                                            .map((p) => `(${p.source})`)
+                                            .join("|"),
+                                        "i"
+                                    ),
+                                },
                             },
-                        },
-                        {
-                            body: {
-                                $regex: new RegExp(pattern.map(p => `(${p.source})`).join('|'), 'i'),
+                            {
+                                body: {
+                                    $regex: new RegExp(
+                                        pattern
+                                            .map((p) => `(${p.source})`)
+                                            .join("|"),
+                                        "i"
+                                    ),
+                                },
                             },
-                        },
-                    ],
-                },
-                ratingFilterQuery, // Apply the rating filter
-            ],
-        })
-    .sort({ title: -1 })
+                        ],
+                    },
+                    ratingFilterQuery, // Apply the rating filter
+                ],
+            })
+                .sort({ title: -1 })
                 .skip(page * postPerPage)
                 .limit(postPerPage)
 
@@ -208,7 +223,7 @@ const modifiedGetPosts = async (req, res) => {
                 reviewImages,
                 downvotes,
                 upvotes,
-                date
+                date,
             }
         })
         return res.status(200).json(newPosts)
@@ -224,114 +239,158 @@ const modifiedGetPosts = async (req, res) => {
 const getStorePosts = async (req, res) => {
     try {
         const { storeID } = req.params
-        const posts = await Post.find({storeID});
-        return res.status(200).json(posts);
-
-    }catch{
-        console.log(e);
-    return res.status(500).json({
-      message: "Encountered an error!",
-      state: "error",
-    });
+        const posts = await Post.find({ storeID })
+        return res.status(200).json(posts)
+    } catch {
+        console.log(e)
+        return res.status(500).json({
+            message: "Encountered an error!",
+            state: "error",
+        })
     }
- 
-};
-
+}
 
 const updatePost = async (req, res) => {
-  try {
-    const { id } = req.params;
+    try {
+        const { id } = req.params
 
-    console.log("update post")
-    console.log(req.body)
+        const fileExist = req.files
 
-    const post = await Post.findOneAndUpdate({ _id: id }, { ...req.body, edited:true }, {
-      new: true,
-    });
+        let media = null
+        console.log(fileExist)
+        if (fileExist) {
+            //upload photo
+            const files = fileExist.img
+            console.log(files)
+            const result = await cloudinary.uploader.upload(
+                files.tempFilePath,
+                {
+                    public_id: Date.now(),
+                    folder: "APDEV-IMAGES",
+                    crop: "fill",
+                    withcredentials: false,
+                }
+            )
 
-    console.log(id);
-    console.log(post);
+            media = result.secure_url
 
-    if (!post) {
-      return res.status(404).json({ error: "This post does not exist!" });
+            fs.unlink(files.tempFilePath, (err) => {
+                if (err) {
+                    console.log("ERror deleting temp file")
+                } else {
+                    console.log("File successfully deleted")
+                }
+            })
+        }
+
+        console.log("update post")
+        // console.log(req.body)
+        let post = null
+        if (!fileExist) {
+            post = await Post.findOneAndUpdate(
+                { _id: id },
+                { ...req.body, edited: true, media: [] },
+                {
+                    new: true,
+                }
+            )
+        } else {
+            post = await Post.findOneAndUpdate(
+                { _id: id },
+                { ...req.body, edited: true, media: [media] },
+                {
+                    new: true,
+                }
+            )
+        }
+        if (!post) {
+            return res.status(404).json({ error: "This post does not exist!" })
+        }
+        console.log(id)
+        console.log(post)
+
+        console.log(post)
+        res.status(200).json({
+            message: "Review successfully updated!",
+            status: "success",
+        })
+    } catch (e) {
+        console.log(e)
+        return res.status(500).json({
+            message: "Server Error!",
+            statue: "error",
+        })
     }
-
-    console.log(post);
-    res.status(200).json({
-      message: "Review successfully updated!",
-      status: "success",
-    });
-  } catch (e) {
-    console.log(e);
-    return res.status(500).json({
-      message: "Server Error!",
-      statue: "error",
-    });
-  }
-};
+}
 
 const createPost = async (req, res) => {
-  try {
-    const { userID, title, body, rating, storeID } = req.body;
-    const fileExist = req.files
-    console.log(req.body);
-    let media = null;
+    try {
+        const { userID, title, body, rating, storeID } = req.body
+        const fileExist = req.files
+        console.log(req.body)
+        let media = []
 
-    if (fileExist) {
-      //upload photo
-      const files = fileExist.img 
-      const result = await cloudinary.uploader.upload(files.tempFilePath, {
-        public_id: Date.now(),
-        folder: "APDEV-IMAGES",
-        crop: "fill",
-        withcredentials: false,
+        if (fileExist) {
+            //upload photo
+            const files = fileExist.img
+            const result = await cloudinary.uploader.upload(
+                files.tempFilePath,
+                {
+                    public_id: Date.now(),
+                    folder: "APDEV-IMAGES",
+                    crop: "fill",
+                    withcredentials: false,
+                }
+            )
 
-    });
+            media = result.secure_url
 
-    media = result.secure_url;
+            fs.unlink(files.tempFilePath, (err) => {
+                if (err) {
+                    console.log("ERror deleting temp file")
+                } else {
+                    console.log("File successfully deleted")
+                }
+            })
+        }
 
-    fs.unlink(files.tempFilePath, (err) => {
-      if (err) {
-        console.log("ERror deleting temp file");
-      } else {
-        console.log("File successfully deleted");
-      }
-    });
-    }
+        const post = await Post.create({
+            userID,
+            storeID,
+            title,
+            body,
+            rating,
+            media,
+        })
 
+        const compute = await Post.find({ storeID: storeID })
 
-    const post = await Post.create({
-      userID,
-      storeID,
-      title,
-      body,
-      rating,
-      media,
-    });
+        const calculateAverageRating = (compute) => {
+            if (!compute || compute.length === 0) {
+                return 0 // Default to 0 if there are no reviews
+            }
 
+            const totalRating = compute.reduce(
+                (sum, review) => sum + review.rating,
+                0
+            )
+            const averageRating = totalRating / compute.length
 
-    const compute = await Post.find({ storeID: storeID });
+            // only gets the whole number
+            return Math.floor(averageRating)
+        }
 
-    const calculateAverageRating = (compute) => {
-      if (!compute || compute.length === 0) {
-        return 0; // Default to 0 if there are no reviews
-      }
-    
-      const totalRating = compute.reduce((sum, review) => sum + review.rating, 0);
-      const averageRating = totalRating / compute.length;
-    
-      // only gets the whole number
-      return Math.floor(averageRating);
-    };
+        const averageRating = calculateAverageRating(compute)
 
-    const averageRating = calculateAverageRating(compute);
+        console.log(averageRating)
 
-    console.log(averageRating);
-
-    const store = await Store.findOneAndUpdate({ _id: storeID }, { rating: averageRating }, {
-      new: true,
-
-    });
+        const store = await Store.findOneAndUpdate(
+            { _id: storeID },
+            { rating: averageRating },
+            {
+                new: true,
+            }
+        )
 
         return res.status(200).json({
             message: "Posted successfully!",
@@ -354,8 +413,6 @@ const createPost = async (req, res) => {
 
 //         console.log(currentUser);
 
-
-
 //         const posts = await Post.find({ userID: currentUser._id })
 
 //         console.log(posts)
@@ -371,236 +428,264 @@ const createPost = async (req, res) => {
 
 const getUserPosts = async (req, res) => {
     try {
-        const { username } = req.params;
+        const { username } = req.params
 
-        const currentUser  = await User.findOne({ username: username })
+        const currentUser = await User.findOne({ username: username })
 
-        const posts = await Post.find({ userID: currentUser._id });
+        const posts = await Post.find({ userID: currentUser._id })
 
         const postDetails = await Promise.all(
             posts.map(async (post) => {
-                const store = await Store.findOne({ _id: post.storeID });
-                const storeName = store ? store.storeName : 'Unknown Store';
-                const storeImage = store ? store.icon : 'default-store-image-url';
+                const store = await Store.findOne({ _id: post.storeID })
+                const storeName = store ? store.storeName : "Unknown Store"
+                const storeImage = store
+                    ? store.icon
+                    : "default-store-image-url"
 
                 return {
                     ...post.toObject(),
                     storeName,
                     storeImage,
-                };
+                }
             })
-        );
+        )
 
-        console.log(postDetails);
-        return res.status(200).json(postDetails);
-    } catch (e)  {
-        console.log(e);
+        console.log(postDetails)
+        return res.status(200).json(postDetails)
+    } catch (e) {
+        console.log(e)
         return res.status(500).json({
             message: "Encountered an error!",
             state: "error",
-        });
+        })
     }
-};
-
+}
 
 const deletePost = async (req, res) => {
-  try{
-    const { id } = req.params
+    try {
+        const { id } = req.params
 
-  const tempPost = await Post.findOne({ _id: id })
-  console.log(tempPost)
+        const tempPost = await Post.findOne({ _id: id })
+        console.log(tempPost)
 
-  if (!tempPost) {
-      return res.status(404).json({ error: 'This post does not exist' })
-  }
+        if (!tempPost) {
+            return res.status(404).json({ error: "This post does not exist" })
+        }
 
-  const comment = await Comment.deleteMany({ sourceID: id })
-  console.log(comment)
+        const comment = await Comment.deleteMany({ sourceID: id })
+        console.log(comment)
 
-  const post = await Post.findOneAndDelete({ _id: id })
+        const post = await Post.findOneAndDelete({ _id: id })
 
-  if (!post) {
-      return res.status(404).json({ error: 'This post does not exist!' })
-  }
-  res.status(200).json(post)
-
-
-  }catch(e){
-    console.log(e);
-    return res.status(500).json({
-      message: "Encountered an error!",
-      state: "error",
-    });
-  }
-  
+        if (!post) {
+            return res.status(404).json({ error: "This post does not exist!" })
+        }
+        res.status(200).json(post)
+    } catch (e) {
+        console.log(e)
+        return res.status(500).json({
+            message: "Encountered an error!",
+            state: "error",
+        })
+    }
 }
 
 const upVotePost = async (req, res) => {
-  try{
-    const { reviewID, userID } = req.params
+    try {
+        const { reviewID, userID } = req.params
 
-  const post = await Post.findOne({ _id: reviewID })
-  console.log(post)
+        const post = await Post.findOne({ _id: reviewID })
+        console.log(post)
 
-  if (!post) {
-      return res.status(404).json({ error: 'This post does not exist' })
-  }
+        if (!post) {
+            return res.status(404).json({ error: "This post does not exist" })
+        }
 
-  const upVote = await Post.findOneAndUpdate({ _id: reviewID }, { $inc: { helpful: 1 } }, {
-      new: true,
-  });
+        const upVote = await Post.findOneAndUpdate(
+            { _id: reviewID },
+            { $inc: { helpful: 1 } },
+            {
+                new: true,
+            }
+        )
 
-  if (!upVote) {
-      return res.status(404).json({ error: 'This post does not exist!' })
-  }
+        if (!upVote) {
+            return res.status(404).json({ error: "This post does not exist!" })
+        }
 
-  const user = await User.findOneAndUpdate({ _id: userID }, { $push: { upvotes: reviewID } }, {
-      new: true,
-  });
-  
+        const user = await User.findOneAndUpdate(
+            { _id: userID },
+            { $push: { upvotes: reviewID } },
+            {
+                new: true,
+            }
+        )
 
-  console.log(upVote)
+        console.log(upVote)
 
-  res.status(200).json({
-    message: "Upvoted successfully!",
-      state: "success",
-  })
-
-  }catch(e){
-    console.log(e);
-    return res.status(500).json({
-      message: "Encountered an error!",
-      state: "error",
-    });
-  }
-  
+        res.status(200).json({
+            message: "Upvoted successfully!",
+            state: "success",
+        })
+    } catch (e) {
+        console.log(e)
+        return res.status(500).json({
+            message: "Encountered an error!",
+            state: "error",
+        })
+    }
 }
 
 const undoUpvotePost = async (req, res) => {
-  try{
-    const { reviewID, userID } = req.params
+    try {
+        const { reviewID, userID } = req.params
 
-  const post = await Post.findOne({ _id: reviewID })
-  console.log(post)
+        const post = await Post.findOne({ _id: reviewID })
+        console.log(post)
 
-  if (!post) {
-      return res.status(404).json({ error: 'This post does not exist' })
-  }
+        if (!post) {
+            return res.status(404).json({ error: "This post does not exist" })
+        }
 
-  const upVote = await Post.findOneAndUpdate({ _id: reviewID }, { $inc: { helpful: -1 } }, {
-      new: true,
-  });
+        const upVote = await Post.findOneAndUpdate(
+            { _id: reviewID },
+            { $inc: { helpful: -1 } },
+            {
+                new: true,
+            }
+        )
 
-  if (!upVote) {
-      return res.status(404).json({ error: 'This post does not exist!' })
-  }
+        if (!upVote) {
+            return res.status(404).json({ error: "This post does not exist!" })
+        }
 
-  const user = await User.findOneAndUpdate({ _id: userID }, { $pull: { upvotes: reviewID } }, {
-      new: true,
-  });
-  
+        const user = await User.findOneAndUpdate(
+            { _id: userID },
+            { $pull: { upvotes: reviewID } },
+            {
+                new: true,
+            }
+        )
 
-  console.log(upVote)
+        console.log(upVote)
 
-  res.status(200).json({
-    message: "Undoed upvote successfully!",
-      state: "success",
-  })
-
-  }catch(e){
-    console.log(e);
-    return res.status(500).json({
-      message: "Encountered an error!",
-      state: "error",
-    });
-  }
-
+        res.status(200).json({
+            message: "Undoed upvote successfully!",
+            state: "success",
+        })
+    } catch (e) {
+        console.log(e)
+        return res.status(500).json({
+            message: "Encountered an error!",
+            state: "error",
+        })
+    }
 }
 
-  
 const downVotePost = async (req, res) => {
-  try{
-    const { reviewID, userID } = req.params
+    try {
+        const { reviewID, userID } = req.params
 
-  const post = await Post.findOne({ _id: reviewID })
-  console.log(post)
+        const post = await Post.findOne({ _id: reviewID })
+        console.log(post)
 
-  if (!post) {
-      return res.status(404).json({ error: 'This post does not exist' })
-  }
+        if (!post) {
+            return res.status(404).json({ error: "This post does not exist" })
+        }
 
-  const downVote = await Post.findOneAndUpdate({ _id: reviewID }, { $inc: { notHelpful: 1 } }, {
-      new: true,
-  });
+        const downVote = await Post.findOneAndUpdate(
+            { _id: reviewID },
+            { $inc: { notHelpful: 1 } },
+            {
+                new: true,
+            }
+        )
 
-  if (!downVote) {
-      return res.status(404).json({ error: 'This post does not exist!' })
-  }
+        if (!downVote) {
+            return res.status(404).json({ error: "This post does not exist!" })
+        }
 
-  const user = await User.findOneAndUpdate({ _id: userID }, { $push: { downvotes: reviewID } }, {
-      new: true,
-  });
-  
+        const user = await User.findOneAndUpdate(
+            { _id: userID },
+            { $push: { downvotes: reviewID } },
+            {
+                new: true,
+            }
+        )
 
-  console.log(downVote)
+        console.log(downVote)
 
-  res.status(200).json({
-    message: "Downvoted successfully!",
-      state: "success",
-  })
-
-  }catch(e){
-    console.log(e);
-    return res.status(500).json({
-      message: "Encountered an error!",
-      state: "error",
-    });
-  }
-  
+        res.status(200).json({
+            message: "Downvoted successfully!",
+            state: "success",
+        })
+    } catch (e) {
+        console.log(e)
+        return res.status(500).json({
+            message: "Encountered an error!",
+            state: "error",
+        })
+    }
 }
 
 const undoDownvotePost = async (req, res) => {
-  try{
-    const { reviewID, userID } = req.params
+    try {
+        const { reviewID, userID } = req.params
 
-  const post = await Post.findOne({ _id: reviewID })
-  console.log(post)
+        const post = await Post.findOne({ _id: reviewID })
+        console.log(post)
 
-  if (!post) {
-      return res.status(404).json({ error: 'This post does not exist' })
-  }
+        if (!post) {
+            return res.status(404).json({ error: "This post does not exist" })
+        }
 
-  const downVote = await Post.findOneAndUpdate({ _id: reviewID }, { $inc: { notHelpful: -1 } }, {
-      new: true,
-  });
+        const downVote = await Post.findOneAndUpdate(
+            { _id: reviewID },
+            { $inc: { notHelpful: -1 } },
+            {
+                new: true,
+            }
+        )
 
-  if (!downVote) {
-      return res.status(404).json({ error: 'This post does not exist!' })
-  }
+        if (!downVote) {
+            return res.status(404).json({ error: "This post does not exist!" })
+        }
 
-  const user = await User.findOneAndUpdate({ _id: userID }, { $pull: { downvotes: reviewID } }, {
-      new: true,
-  });
+        const user = await User.findOneAndUpdate(
+            { _id: userID },
+            { $pull: { downvotes: reviewID } },
+            {
+                new: true,
+            }
+        )
 
-  console.log(downVote)
+        console.log(downVote)
 
-  res.status(200).json({
-    message: "Undoed downvote successfully!",
-      state: "success",
-  })
-
-  }catch(e){
-    console.log(e);
-    return res.status(500).json({
-      message: "Encountered an error!",
-      state: "error",
-    });
-  }
-
+        res.status(200).json({
+            message: "Undoed downvote successfully!",
+            state: "success",
+        })
+    } catch (e) {
+        console.log(e)
+        return res.status(500).json({
+            message: "Encountered an error!",
+            state: "error",
+        })
+    }
 }
 
-
-module.exports = { createPost, getPosts, getStorePosts, getUserPosts,
+module.exports = {
+    createPost,
+    getPosts,
+    getStorePosts,
+    getUserPosts,
     modifiedGetPosts,
     getAmountPosts,
-    searchPosts,updatePost, deletePost, upVotePost, undoUpvotePost, downVotePost, undoDownvotePost };
+    searchPosts,
+    updatePost,
+    deletePost,
+    upVotePost,
+    undoUpvotePost,
+    downVotePost,
+    undoDownvotePost,
+}
