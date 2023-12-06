@@ -44,8 +44,8 @@ const useRegister = () => {
                 isLoading: false,
                 type: "success",
             });
-            localStorage.setItem("user", JSON.stringify({username: consume.username, token: consume.token, id: consume.id, image: consume.image})); //comment id if not needed.
-            dispatch({ type: "LOGIN", payload: { username: consume.username, token: consume.token, id: consume.id, image: consume.image } });
+            localStorage.setItem("user", JSON.stringify({username: consume.username, token: consume.token, id: consume.id, image: consume.image, expires: consume.expires, rememberMe: consume.rememberMe})); //comment id if not needed.
+            dispatch({ type: "LOGIN", payload: { username: consume.username, token: consume.token, id: consume.id, image: consume.image, expires: consume.expires, rememberMe: consume.rememberMe } });
             nav("/");
             return consume;
         } catch (e) {

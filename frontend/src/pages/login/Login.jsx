@@ -28,7 +28,7 @@ const Login = () => {
 
     const handleLogin = async () => {
         // Add your authentication logic here
-        const user = await login(username, password)
+        const user = await login(username, password, rememberMe)
         console.log(username)
         console.log(password)
     }

@@ -1,6 +1,6 @@
 const express = require("express")
 
-const { getUsers, createUser, loginUser, updateUserImage, updateUserDescription, get_singleUser, get_by_id } = require("../controllers/userController")
+const { getUsers, createUser, loginUser, updateUserImage, updateUserDescription, get_singleUser, get_by_id, refreshTokens } = require("../controllers/userController")
 
 const router = express.Router()
 
@@ -35,5 +35,7 @@ router.delete("/:id", (req, res) => {
 router.patch("/:id", (req, res) => {
     res.json({ message: "UPDATE a single user" })
 })
+
+router.post("/refresh_token", refreshTokens);
 
 module.exports = router
