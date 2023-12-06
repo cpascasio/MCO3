@@ -42,7 +42,7 @@
 .custom-hr {
     border: 0.5px solid #885133;
     top: 110px;
-    margin-top: 30px; /* Adjust as needed */
+    margin-top: 25px; /* Adjust as needed */
   }
 
 .review-box .top-container .profile-icon {
@@ -74,6 +74,15 @@
     margin-left: 8px;
 }
 
+.date-edited-container {
+    display: flex;
+    align-items: center; /* Vertical alignment, adjust as needed */
+}
+
+.date-container,
+.edited-container {
+    margin-right: 10px; /* Adjust the margin as needed */
+}
 
 
 .top-container .date-container{
@@ -85,7 +94,17 @@
     line-height: normal;
     display: flex;
     margin-top: 2rem;
-    margin-right: 1rem;
+    /* margin-right: 1rem; */
+  }
+
+  .top-container .edited-container{
+    color: #8c8c8c;
+    font-family: "Inter-SemiBold", Helvetica;
+    font-size: 10px;
+    font-weight: 600;
+     margin-top: 2rem;
+    /* margin-left: 2rem; */
+    font-style: italic;
   }
 
 .review-box .review-image {

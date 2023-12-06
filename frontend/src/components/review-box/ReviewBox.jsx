@@ -92,6 +92,16 @@ const ReviewBox = (reviews) => {
 
       const formattedDate = formatDate(reviews.date);
 
+      console.log(reviews.edited);
+      function isEdited(edited){
+
+        console.log(edited);
+        if(edited == true){
+            return 'Edited';
+        }
+
+    }
+
     return (
         <>
              <div className={`review-box shadow-xl ${reviews.reviewImage?.length > 0 ? '' : 'no-image'}`} onClick={reviews.onClick} style={{ cursor: 'pointer' }}>
@@ -101,7 +111,12 @@ const ReviewBox = (reviews) => {
                 
                         <div className="text-wrapper">{reviews.name}</div>
                     </Link>
-                    <div className="date-container">{formattedDate}</div>
+                    <div className="date-edited-container">
+                        <div className="date-container">{formattedDate}</div>
+                        <div className="edited-container">{isEdited(reviews.edited)}</div>
+                    </div>
+            
+                    
                 </div>
                 
                 {/* {reviews.image && <img className="review-image" alt="Review image" src={reviews.reviewImage} />} */}

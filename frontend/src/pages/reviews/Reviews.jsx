@@ -176,6 +176,7 @@ const Reviews = () => {
                             onHelpfulClick={handleHelpfulClick}
                             onNotHelpfulClick={handleNotHelpfulClick}
                             date={reviewData.date}
+                            edited={reviewData.edited}
                  
                         />
                     ))}
