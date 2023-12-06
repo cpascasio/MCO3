@@ -23,7 +23,7 @@ const useProfileUpload = () => {
     axios.post(import.meta.env.VITE_BASE_URL + "/api/users/update_image", form, config)
       .then(() => {
         toast.update(toastID.current, {
-          render: "Photo successfully updated!",
+          render: "Profile successfully updated!",
           autoClose: 3000,
           closeButton: true,
           isLoading: false,
