@@ -6,12 +6,62 @@ const fs = require("fs");
 const bcrypt = require("bcrypt");
 const validator = require("validator");
 const jwt = require("jsonwebtoken");
+const { error } = require("console");
 
 const createToken = (_id) => {
   return jwt.sign({ _id }, process.env.JWT_SECRET, {
     expiresIn: "21d",
   });
 }
+
+
+const createTokenOneDay = (_id) => {
+  return jwt.sign({ _id }, process.env.JWT_SECRET, {
+    expiresIn: "1d",
+  });
+}
+
+const getTokenExpirationDate = (token) => {
+  const decoded = jwt.decode(token);
+  if (!decoded.exp) {
+    return null;
+  }
+  return new Date(decoded.exp * 1000);
+
+}
+
+const refreshTokens = async (req, res) => {
+
+  const refreshToken = req.body.refreshToken;
+  try{
+
+  const decoded = jwt.decode(refreshToken);
+  
+  if (!decoded.exp) {
+    return null;
+  }
+  const user = await User.findOne({ _id: decoded._id });
+  if (!user) {
+    return null;
+  }
+  
+  const token = createToken(user._id);
+  const tokenExpiration = getTokenExpirationDate(token);
+  
+
+  res.status(200).json({
+    token,
+    tokenExpiration,
+  });
+
+
+}catch(e){
+  console.log(e)
+  res.status(400).json({ error: e.message });
+
+}
+}
+
 
 
 const getUsers = async (req, res) => {
@@ -86,7 +136,7 @@ const createUser = async (req, res) => {
     console.log("USER: ");
     console.log(user);
 
-    const token = createToken(user._id);
+    const token = createTokenOneDay(user._id);
 
     console.log("TOKEN: ");
     console.log(token);
@@ -98,6 +148,8 @@ const createUser = async (req, res) => {
         username: user.username,
         image: user.image,
         token: token,
+        expires: getTokenExpirationDate(token),
+        rememberMe: false,
     });
 
   } catch (e) {
@@ -145,9 +197,11 @@ const createUser = async (req, res) => {
 const loginUser = async (req, res) => {
 
   try {
-    const { username, password } = req.body;
+    const { username, password, rememberMe } = req.body;
 
     const users = await User.findOne({ username });
+
+    let token, tokenExpiration;
 
     if (!users) {
       return res
@@ -164,7 +218,15 @@ const loginUser = async (req, res) => {
         .json({ message: "wrong password", state: "error" });
     }
 
-    const token = createToken(users._id);
+    if(rememberMe){
+    token = createToken(users._id);
+    tokenExpiration = getTokenExpirationDate(token);
+    }else{
+    token = createTokenOneDay(users._id);
+    tokenExpiration = getTokenExpirationDate(token);
+    }
+
+
 
     delete users._doc.password;
     return res
@@ -174,8 +236,11 @@ const loginUser = async (req, res) => {
         username: users.username,
         image: users.image,
         token: token,
+        expires: tokenExpiration,
+        rememberMe: rememberMe,
         message: "Login successful!",
         state: "success",
+
       });
   } catch (e) {
     console.log(e)
@@ -294,5 +359,6 @@ module.exports = {
   updateUserImage,
   updateUserDescription,
   get_singleUser,
-  get_by_id
+  get_by_id,
+  refreshTokens,
 };

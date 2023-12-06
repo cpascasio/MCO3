@@ -39,8 +39,8 @@ const useLogin = () => {
                 isLoading: false,
                 type: "success",
             });
-            localStorage.setItem('user', JSON.stringify({username: consume.username, token: consume.token, id: consume.id, image: consume.image}))
-            dispatch({type: 'LOGIN', payload: {username: consume.username, token: consume.token, id: consume.id, image: consume.image} })
+            localStorage.setItem('user', JSON.stringify({username: consume.username, token: consume.token, id: consume.id, image: consume.image, expires: consume.expires, rememberMe: consume.rememberMe}))
+            dispatch({type: 'LOGIN', payload: {username: consume.username, token: consume.token, id: consume.id, image: consume.image, expires: consume.expires, rememberMe: consume.rememberMe} })
             nav("/");
             console.log("CONSUME HERE");
             console.log(consume);
