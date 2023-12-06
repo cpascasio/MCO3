@@ -19,7 +19,22 @@ const Register = () => {
 
     const handleRegister = async () => {
         // Add your authentication logic here
-        if (password !== cpassword) {
+        if (username === "" || password === "" || cpassword === "") {
+            toast.error("Please fill in all fields");
+            return;
+        } else if (!/^[a-zA-Z0-9]+$/.test(username)) {
+            toast.error('Username must be alphanumeric');
+            return;
+        } else if (password.length < 8) {
+            toast.error("Password must be at least 8 characters");
+            return;
+        } else if (!/\d/.test(password)) {
+            toast.error("Password must contain at least 1 number");
+            return;
+        } else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}/.test(password)) {
+            toast.error('Password must contain at least one lowercasem one uppercase letter, and one special character');
+            return;
+        } else if (password !== cpassword) {
             toast.error("Passwords do not match");
             return;
         }

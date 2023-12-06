@@ -28,7 +28,12 @@ const Login = () => {
 
     const handleLogin = async () => {
         // Add your authentication logic here
-        const user = await login(username, password, rememberMe)
+        if (username === '' || password === '') {
+            toast.error("Please fill in all fields");
+            return;
+        } else {
+            const user = await login(username, password, rememberMe)
+        }
         console.log(username)
         console.log(password)
     }
